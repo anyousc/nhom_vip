@@ -5,22 +5,21 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>KHO VIDEO 18 VIP</title>
     <style>
-      
         /* Ẩn thanh navbar Blogger */
-#navbar-iframe {
-    display: none !important;
-}
+        #navbar-iframe {
+            display: none !important;
+        }
 
-body {
-    margin: 0 !important;
-    padding: 20px !important;
-}
+        body {
+            margin: 0 !important;
+            padding: 20px !important;
+        }
 
-/* Ẩn header, sidebar Blogger */
-.header, .sidebar, .footer, #header, #sidebar, #footer {
-    display: none !important;
-}
-      
+        /* Ẩn header, sidebar Blogger */
+        .header, .sidebar, .footer, #header, #sidebar, #footer {
+            display: none !important;
+        }
+
         * {
             margin: 0;
             padding: 0;
@@ -36,22 +35,9 @@ body {
             margin: 0 auto;
         }
 
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-
-        body {
-            font-family: Arial, sans-serif;
-            background-color: #000;
-            color: #fff;
-            padding: 20px;
-        }
-
         .widget-container {
             max-width: 340px;
-            margin: 30px auto 0;
+            margin: 30px auto;
             background: linear-gradient(145deg, #1c1c1c, #0d0d0d);
             border-radius: 18px;
             padding: 25px;
@@ -157,13 +143,12 @@ body {
         .member-avatar {
             width: 28px;
             height: 28px;
-          aspect-ratio: 1 / 1; 
-object-fit: cover;            /* Cắt ảnh cho đẹp, không méo */
-    object-position: center;      /* Lấy trung tâm ảnh */
+            aspect-ratio: 1 / 1; 
+            object-fit: cover;
+            object-position: center;
             border-radius: 50%;
             margin-right: 8px;
             border: 1px solid #666666;
-            object-fit: cover;
         }
 
         .telegram-buttons {
@@ -208,52 +193,299 @@ object-fit: cover;            /* Cắt ảnh cho đẹp, không méo */
             background-repeat: no-repeat;
             flex-shrink: 0;
         }
-      
-      /* THÊM CSS POPUP Ở ĐÂY */
+
+        /* CSS PHẦN DANH SÁCH TOÀN BỘ NHÓM */
+        .all-groups-container {
+            max-width: 340px;
+            margin: 30px auto;
+            background: linear-gradient(145deg, #1c1c1c, #0d0d0d);
+            border-radius: 18px;
+            padding: 25px;
+            box-shadow: 0 10px 30px rgba(255, 0, 0, 0.3);
+            border: 1px solid #333;
+        }
+
+        .all-groups-title {
+            font-family: 'Arial Black', sans-serif;
+            font-size: 22px;
+            font-weight: 900;
+            color: #ff4d4d;
+            margin-bottom: 25px;
+            text-align: center;
+            text-transform: uppercase;
+            text-shadow: 0 0 5px rgba(255, 0, 0, 0.8);
+            border-bottom: 2px solid #ff4d4d;
+            padding-bottom: 10px;
+        }
+
+        .group-list {
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+        }
+
+        .group-item {
+            background: linear-gradient(145deg, #0f0f0f, #0a0a0a);
+            border-radius: 12px;
+            padding: 15px;
+            border: 1px solid #333;
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .group-item::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 1px;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.3), transparent);
+        }
+
+        .group-item:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 25px rgba(255, 255, 255, 0.15),
+                        0 0 20px rgba(255, 255, 255, 0.1),
+                        0 0 30px rgba(255, 255, 255, 0.05);
+            border-color: #ff4d4d;
+        }
+
+        .group-item-content {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            margin-bottom: 12px;
+        }
+
+        .group-name {
+            font-size: 16px;
+            font-weight: bold;
+            color: #fff;
+            text-shadow: 0 0 10px rgba(255, 255, 255, 0.3);
+            flex-grow: 1;
+            padding-right: 15px;
+        }
+
+        .group-join-btn {
+            background: linear-gradient(145deg, #FF4500, #cc3700);
+            color: white;
+            border: none;
+            padding: 8px 16px;
+            border-radius: 8px;
+            font-size: 14px;
+            font-weight: bold;
+            cursor: pointer;
+            text-decoration: none;
+            display: inline-block;
+            text-align: center;
+            min-width: 80px;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 15px rgba(255, 69, 0, 0.3);
+        }
+
+        .group-join-btn:hover {
+            background: linear-gradient(145deg, #ff5500, #dd4400);
+            box-shadow: 0 6px 20px rgba(255, 69, 0, 0.4);
+            transform: scale(1.05);
+        }
+
+        /* PHẦN THÀNH VIÊN MỚI VÀO NHÓM */
+        .recent-member {
+            display: flex;
+            align-items: center;
+            background: rgba(20, 20, 20, 0.6);
+            border-radius: 8px;
+            padding: 8px 12px;
+            border-left: 3px solid #ff4d4d;
+            animation: fadeIn 0.5s ease;
+            margin-top: 8px;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(5px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .recent-member-avatar {
+            width: 32px;
+            height: 32px;
+            border-radius: 50%;
+            object-fit: cover;
+            margin-right: 10px;
+            border: 2px solid #ff4d4d;
+            box-shadow: 0 0 8px rgba(255, 77, 77, 0.5);
+        }
+
+        .recent-member-info {
+            flex-grow: 1;
+            display: flex;
+            flex-direction: column;
+            gap: 2px;
+        }
+
+        .recent-member-name {
+            font-size: 12px;
+            font-weight: normal; /* Không in đậm */
+            color: #fff;
+            display: flex;
+            align-items: center;
+            gap: 4px;
+        }
+
+        .recent-member-status {
+            font-size: 11px;
+            color: #4CAF50;
+            font-weight: normal;
+        }
+
+        .recent-member-status::before {
+            content: "✓";
+            display: inline-block;
+            width: 14px;
+            height: 14px;
+            background-color: #4CAF50;
+            color: white;
+            border-radius: 50%;
+            text-align: center;
+            line-height: 14px;
+            font-size: 9px;
+            margin-right: 5px;
+        }
+
+        .recent-member-time {
+            font-size: 11px;
+            color: #888;
+            display: flex;
+            align-items: center;
+            gap: 4px;
+        }
+
+        .recent-member-time::before {
+            content: "•";
+            display: inline-block;
+            color: #4CAF50;
+        }
+
+        .recent-member-actions {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            margin-left: 10px;
+        }
+
+        .friend-btn {
+            background: linear-gradient(145deg, #2196F3, #0d8bf2);
+            color: white;
+            border: none;
+            padding: 4px 10px;
+            border-radius: 6px;
+            font-size: 10px;
+            font-weight: bold;
+            cursor: pointer;
+            text-decoration: none;
+            display: inline-block;
+            text-align: center;
+            transition: all 0.3s ease;
+            box-shadow: 0 2px 8px rgba(33, 150, 243, 0.3);
+            white-space: nowrap;
+        }
+
+        .friend-btn:hover {
+            background: linear-gradient(145deg, #42a5f5, #1e88e5);
+            box-shadow: 0 3px 12px rgba(33, 150, 243, 0.4);
+            transform: scale(1.05);
+        }
+
+        .friend-btn:active {
+            transform: scale(0.98);
+        }
+
+        /* CSS POPUP */
         .notification-popup {
-    position: fixed;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    background: rgba(20, 20, 20, 0.7);   /* nền glass dark */
-    backdrop-filter: blur(12px);         /* hiệu ứng kính */
-    -webkit-backdrop-filter: blur(12px);
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background: rgba(20, 20, 20, 0.7);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            color: #f1f1f1;
+            padding: 18px 24px;
+            border-radius: 8px;
+            border: 1px solid rgba(255, 255, 255, 0.15);
+            box-shadow: 0 12px 45px rgba(0, 0, 0, 0.55);
+            z-index: 10000;
+            text-align: center;
+            font-size: 16px;
+            font-weight: 600;
+            opacity: 0;
+            transition: opacity 0.35s ease-in-out;
+            pointer-events: none;
+            display: inline-block;
+            max-width: 90%;
+        }
 
-    color: #f1f1f1;
-    padding: 18px 24px;
-    border-radius: 8px;
+        .notification-popup.show {
+            opacity: 1;
+        }
 
-    border: 1px solid rgba(255, 255, 255, 0.15); /* viền xám mờ */
+        .notification-popup.hide {
+            opacity: 0;
+        }
 
-    box-shadow: 0 12px 45px rgba(0, 0, 0, 0.55); /* đổ bóng mạnh hơn */
-
-    z-index: 10000;
-    text-align: center;
-    font-size: 16px;
-    font-weight: 600;
-
-    opacity: 0;
-    transition: opacity 0.35s ease-in-out;
-    pointer-events: none;
-
-    display: inline-block; /* fit nội dung */
-    max-width: 90%;
-}
-
-.notification-popup.show {
-    opacity: 1;
-}
-
-.notification-popup.hide {
-    opacity: 0;
-}
-
-      
-      
-      
+        /* Responsive */
+        @media (max-width: 400px) {
+            .widget-container,
+            .all-groups-container {
+                max-width: 320px;
+                padding: 20px;
+                margin: 20px auto;
+            }
+            
+            .group-item-content {
+                flex-direction: column;
+                gap: 10px;
+                align-items: flex-start;
+            }
+            
+            .group-join-btn {
+                width: 100%;
+                margin-top: 10px;
+            }
+            
+            .group-name {
+                padding-right: 0;
+            }
+            
+            .recent-member {
+                flex-direction: column;
+                text-align: center;
+                padding: 10px;
+            }
+            
+            .recent-member-avatar {
+                margin-right: 0;
+                margin-bottom: 8px;
+            }
+            
+            .recent-member-actions {
+                margin-left: 0;
+                margin-top: 8px;
+                justify-content: center;
+                width: 100%;
+            }
+            
+            .friend-btn {
+                padding: 6px 12px;
+                font-size: 11px;
+            }
+        }
     </style>
 </head>
 <body>
+    <!-- Widget chính -->
     <div class="widget-container">
         <div class="widget-title" id="widgetTitle">TÊN NHÓM</div>
         
@@ -275,12 +507,26 @@ object-fit: cover;            /* Cắt ảnh cho đẹp, không méo */
         </div>
     </div>
 
+    <!-- Phần danh sách toàn bộ nhóm -->
+    <div class="all-groups-container">
+        <div class="all-groups-title">DANH SÁCH TẤT CẢ NHÓM</div>
+        
+        <div class="group-list" id="allGroupsList">
+            <!-- Danh sách nhóm sẽ được thêm bằng JavaScript -->
+        </div>
+    </div>
+
+    <!-- Popup thông báo -->
+    <div class="notification-popup" id="notificationPopup">
+        Trang sẽ tự động chuyển hướng
+    </div>
+
     <script>
         // ===== CẤU HÌNH DỮ LIỆU =====
         
         // Danh sách các nhóm (Thêm/sửa tại đây)
-       const allGroupsData = [
-               { 
+        const allGroupsData = [
+            { 
                 name: "THÍCH LÁI MÁY BAY", 
                 img: "https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEg0zHHca-hmkqPS0V8IRaGnBxfld9tXROxyhSaQt2_MNrQ4Rjjqdb_A2EGXjrghtaTlLlbJjczoraKETaMgEyU_GKiuMtVAIg1s-UnX4n_6J6cfoYXSxyUc74HBGrKx0AIId20MKr0peS2l7vBTM9S5qvoYtWHM9zI1ASxrMwGDqGYEgskScGprJEaeak4/s538/chbotrnnhanhvnucmchochng-ezgif.com-video-to-gif-converter.gif", 
                 link: "https://t.me/+qFItBMf26kc3ZmM9"
@@ -323,89 +569,88 @@ object-fit: cover;            /* Cắt ảnh cho đẹp, không méo */
         ];
 
         // Danh sách tên nữ (Thêm/sửa tại đây)
-       const femaleNames = [
-    "Vy", "Linh", "Nga", "Trang", "Nhi",
-    "Thảo", "Hà", "Mi", "Mai", "Hương",
-    "Yến", "Tú", "Oanh", "Hồng", "Giang",
-    "Khánh Linh", "Lan", "Ngọc", "Quỳnh", "Uyên",
-    "Tiên", "Trà My", "Ngọc Trâm", "Tố Như", "Bích",
-    "Lan Anh", "Ngọc Anh", "Tú Trinh", "An Nhiên", "Thùy Linh",
-    "@vybe_yeu", "@linhmoon_98", "@ngocanh_real", "@nhinguyen_03"
-];
+        const femaleNames = [
+            "Vy", "Linh", "Nga", "Trang", "Nhi",
+            "Thảo", "Hà", "Mi", "Mai", "Hương",
+            "Yến", "Tú", "Oanh", "Hồng", "Giang",
+            "Khánh Linh", "Lan", "Ngọc", "Quỳnh", "Uyên",
+            "Tiên", "Trà My", "Ngọc Trâm", "Tố Như", "Bích",
+            "Lan Anh", "Ngọc Anh", "Tú Trinh", "An Nhiên", "Thùy Linh",
+            "@vybe_yeu", "@linhmoon_98", "@ngocanh_real", "@nhinguyen_03"
+        ];
 
-// Tên nam
-const maleNames = [
-    "Minh", "Quang", "Hải", "Nam", "Duy",
-    "Khánh", "Hoàng", "Phúc", "Khoa", "Long",
-    "Trọng", "Đạt", "Toàn", "Việt", "Tùng",
-    "Lâm", "Tuấn", "Phong", "Cường", "Dũng",
-    "Thiện", "Hữu", "Văn", "Thành", "Nhật",
-    "@anhtrong_99", "@quangpro_vn", "@minhkhoa_vip"
-];
+        // Tên nam
+        const maleNames = [
+            "Minh", "Quang", "Hải", "Nam", "Duy",
+            "Khánh", "Hoàng", "Phúc", "Khoa", "Long",
+            "Trọng", "Đạt", "Toàn", "Việt", "Tùng",
+            "Lâm", "Tuấn", "Phong", "Cường", "Dũng",
+            "Thiện", "Hữu", "Văn", "Thành", "Nhật",
+            "@anhtrong_99", "@quangpro_vn", "@minhkhoa_vip"
+        ];
 
         // Danh sách ảnh đại diện nữ (Thêm/sửa tại đây)
-       const femaleAvatars = [
-    "https://i.postimg.cc/GtGgQt3R/6104636064225413132-99.jpg",
-    "https://i.postimg.cc/cCwkmC1n/6264935479346578537-99.jpg",
-    "https://i.postimg.cc/PJYV4Jfm/6266929838820540259-99.jpg",
-  "https://i.postimg.cc/MpVPJv17/100da3feda81c4e143a8a91240963596.jpg",
-"https://i.postimg.cc/HkXZ1VbM/15e06da381bd4365dfd6db4efeb68e44.jpg",
-"https://i.postimg.cc/wjLfY7DS/1921271665325e04e2a4eef681feb6fb.jpg",
-"https://i.postimg.cc/QxR4zpK5/1a3b67717235b4f8267cac9b74d88dc2.jpg",
-"https://i.postimg.cc/P5Y3nP13/36129e272e4b2db4f4ba1b65e2801893.jpg",
-"https://i.postimg.cc/8PqKYhfd/3e9e900ad55ddef5205aa189fff7b728.jpg",
-"https://i.postimg.cc/MpVPJv1g/438101279c6cbc015d939b47ba898d6c.jpg",
-"https://i.postimg.cc/J496FbHb/4cf539686bd21e9215c423a137732676.jpg",
-"https://i.postimg.cc/dtzHf8Z2/6c75e6bcb31a896e9757f4713c774496.jpg",
-"https://i.postimg.cc/L6rCWzgB/6e65c436943085aba9ebb60151d4b455.jpg",
-"https://i.postimg.cc/fRm2QJY9/6f1e5c35aa8d77a0adfc211d695e89ab.jpg",
-"https://i.postimg.cc/Qd14ZHcP/82719f49515e81558e18d74b637e981d.jpg",
-"https://i.postimg.cc/g28Sbn38/83b296a39b588029d8b13eee5f9b67fb.jpg",
-"https://i.postimg.cc/52L7W68n/8473adcb2db139d2fdc66cdfe67f7941.jpg",
-"https://i.postimg.cc/6pnjxyCz/901c4fe7f5fdaa1e9ff801b0f6e2c9a0.jpg",
-"https://i.postimg.cc/htTyRfVx/9aa04d31b2e09ce52fce589342cbd515.jpg",
-"https://i.postimg.cc/HkXZ1VQG/a23b1dd2e119ae63c9bf4238368c4ba1.jpg",
-"https://i.postimg.cc/jSPgYLzr/aa935940c2b2c7983279bfd2e680a1ef.jpg",
-"https://i.postimg.cc/SK4ZSkG1/ae17b882b104c3e8f1d25025b3c46698.jpg",
-"https://i.postimg.cc/tgbrqpzm/aeab1b14eab517aecee70410d1580bd7.jpg",
-"https://i.postimg.cc/q7rmJ4G5/b1014079091af88a7815830a6bcd72ad.jpg",
-"https://i.postimg.cc/3whL8YZz/ba082e45574ac77888a6455ca9e4c67c.jpg",
-"https://i.postimg.cc/QMD68hbL/c363bc5605ffc6e09651fcdd30b548be.jpg",
-"https://i.postimg.cc/Zqmfb4ct/d9902950c827433b3590e9256f65d346.jpg",
-"https://i.postimg.cc/1zSWmsH1/fb5b85c07a7cfed9eae29f566519cc4f.jpg"
+        const femaleAvatars = [
+            "https://i.postimg.cc/GtGgQt3R/6104636064225413132-99.jpg",
+            "https://i.postimg.cc/cCwkmC1n/6264935479346578537-99.jpg",
+            "https://i.postimg.cc/PJYV4Jfm/6266929838820540259-99.jpg",
+            "https://i.postimg.cc/MpVPJv17/100da3feda81c4e143a8a91240963596.jpg",
+            "https://i.postimg.cc/HkXZ1VbM/15e06da381bd4365dfd6db4efeb68e44.jpg",
+            "https://i.postimg.cc/wjLfY7DS/1921271665325e04e2a4eef681feb6fb.jpg",
+            "https://i.postimg.cc/QxR4zpK5/1a3b67717235b4f8267cac9b74d88dc2.jpg",
+            "https://i.postimg.cc/P5Y3nP13/36129e272e4b2db4f4ba1b65e2801893.jpg",
+            "https://i.postimg.cc/8PqKYhfd/3e9e900ad55ddef5205aa189fff7b728.jpg",
+            "https://i.postimg.cc/MpVPJv1g/438101279c6cbc015d939b47ba898d6c.jpg",
+            "https://i.postimg.cc/J496FbHb/4cf539686bd21e9215c423a137732676.jpg",
+            "https://i.postimg.cc/dtzHf8Z2/6c75e6bcb31a896e9757f4713c774496.jpg",
+            "https://i.postimg.cc/L6rCWzgB/6e65c436943085aba9ebb60151d4b455.jpg",
+            "https://i.postimg.cc/fRm2QJY9/6f1e5c35aa8d77a0adfc211d695e89ab.jpg",
+            "https://i.postimg.cc/Qd14ZHcP/82719f49515e81558e18d74b637e981d.jpg",
+            "https://i.postimg.cc/g28Sbn38/83b296a39b588029d8b13eee5f9b67fb.jpg",
+            "https://i.postimg.cc/52L7W68n/8473adcb2db139d2fdc66cdfe67f7941.jpg",
+            "https://i.postimg.cc/6pnjxyCz/901c4fe7f5fdaa1e9ff801b0f6e2c9a0.jpg",
+            "https://i.postimg.cc/htTyRfVx/9aa04d31b2e09ce52fce589342cbd515.jpg",
+            "https://i.postimg.cc/HkXZ1VQG/a23b1dd2e119ae63c9bf4238368c4ba1.jpg",
+            "https://i.postimg.cc/jSPgYLzr/aa935940c2b2c7983279bfd2e680a1ef.jpg",
+            "https://i.postimg.cc/SK4ZSkG1/ae17b882b104c3e8f1d25025b3c46698.jpg",
+            "https://i.postimg.cc/tgbrqpzm/aeab1b14eab517aecee70410d1580bd7.jpg",
+            "https://i.postimg.cc/q7rmJ4G5/b1014079091af88a7815830a6bcd72ad.jpg",
+            "https://i.postimg.cc/3whL8YZz/ba082e45574ac77888a6455ca9e4c67c.jpg",
+            "https://i.postimg.cc/QMD68hbL/c363bc5605ffc6e09651fcdd30b548be.jpg",
+            "https://i.postimg.cc/Zqmfb4ct/d9902950c827433b3590e9256f65d346.jpg",
+            "https://i.postimg.cc/1zSWmsH1/fb5b85c07a7cfed9eae29f566519cc4f.jpg"
+        ];
 
-];
-
-// Danh sách ảnh nam
-const maleAvatars = [
-    "https://i.postimg.cc/rFdw8LnN/photo-2023-02-20-10-15-53.jpg",
-    "https://i.postimg.cc/m202k6J7/photo-2024-06-15-21-41-43.jpg",
-    "https://i.postimg.cc/CLWL56XG/photo-2025-03-20-17-55-27.jpg","https://i.postimg.cc/T2CkqzcT/037598cab1dfc7fe94f8a5c2a3502ca1.jpg",
-"https://i.postimg.cc/NGpN73xc/341398c0dfe8ed9b55d1fa0fe8de7b05.jpg",
-"https://i.postimg.cc/sx6wjW2K/490f18bc41427a95dc2c1e9b56d0ee2f.jpg",
-"https://i.postimg.cc/SRTDS9K6/4dde0580bad54b459f57f01fd14d62fd.jpg",
-"https://i.postimg.cc/vTq3Ynm0/72b29e77cae81ae3c55d0d1aca84fbb7.jpg",
-"https://i.postimg.cc/Pf26zgMH/781e3908b7c79fb6499cc72d9447f144.jpg",
-"https://i.postimg.cc/5y7n4ztn/7b4d77048f5e8435a99b97453b3e1654.jpg",
-"https://i.postimg.cc/xjtsyw3h/8a94253df5e7a8209e6681d4c139ddf3.jpg",
-"https://i.postimg.cc/G3qMJWjL/ae235ab23ef84f2d131da0aff905748b.jpg",
-"https://i.postimg.cc/zD0dSskV/b4194e5641543171236be12abce5aa52.jpg",
-"https://i.postimg.cc/DfBCd9cW/d3f1f137b25ca3df0aa2c4debe35aa91.jpg",
-"https://i.postimg.cc/9XJxt6BR/e577ac6cda89eaa776cc20ce836db94d.jpg",
-"https://i.postimg.cc/L4NyBcVf/e80127fed7d8150aad67e534ef090675.jpg"
-
-];
-
+        // Danh sách ảnh nam
+        const maleAvatars = [
+            "https://i.postimg.cc/rFdw8LnN/photo-2023-02-20-10-15-53.jpg",
+            "https://i.postimg.cc/m202k6J7/photo-2024-06-15-21-41-43.jpg",
+            "https://i.postimg.cc/CLWL56XG/photo-2025-03-20-17-55-27.jpg",
+            "https://i.postimg.cc/T2CkqzcT/037598cab1dfc7fe94f8a5c2a3502ca1.jpg",
+            "https://i.postimg.cc/NGpN73xc/341398c0dfe8ed9b55d1fa0fe8de7b05.jpg",
+            "https://i.postimg.cc/sx6wjW2K/490f18bc41427a95dc2c1e9b56d0ee2f.jpg",
+            "https://i.postimg.cc/SRTDS9K6/4dde0580bad54b459f57f01fd14d62fd.jpg",
+            "https://i.postimg.cc/vTq3Ynm0/72b29e77cae81ae3c55d0d1aca84fbb7.jpg",
+            "https://i.postimg.cc/Pf26zgMH/781e3908b7c79fb6499cc72d9447f144.jpg",
+            "https://i.postimg.cc/5y7n4ztn/7b4d77048f5e8435a99b97453b3e1654.jpg",
+            "https://i.postimg.cc/xjtsyw3h/8a94253df5e7a8209e6681d4c139ddf3.jpg",
+            "https://i.postimg.cc/G3qMJWjL/ae235ab23ef84f2d131da0aff905748b.jpg",
+            "https://i.postimg.cc/zD0dSskV/b4194e5641543171236be12abce5aa52.jpg",
+            "https://i.postimg.cc/DfBCd9cW/d3f1f137b25ca3df0aa2c4debe35aa91.jpg",
+            "https://i.postimg.cc/9XJxt6BR/e577ac6cda89eaa776cc20ce836db94d.jpg",
+            "https://i.postimg.cc/L4NyBcVf/e80127fed7d8150aad67e534ef090675.jpg"
+        ];
 
         // Danh sách hành động ngẫu nhiên (Thêm/sửa tại đây)
         const randomActions = [
-           
-"Chào cậu! Xin làm quen, đừng ngại nhé", "Nhóm mình thiếu cậu, nay đủ rồi", "Tuyệt vời, tìm đúng người để thả thính", "Mình chờ cậu từ lâu lắm rồi đấy", "Tim mình có chỗ, cậu vào không", "Bạn đến đây vì muốn tìm ai", "Nụ cười cậu làm tim mình lạc nhịp", "Gu mình đấy, đừng đi đâu nhé", "Mãi mới thấy cậu xuất hiện ở đây", "Cậu có muốn làm người yêu mình", "Xin thông tin để chúng ta làm bạn", "Nhóm này tự dưng đáng yêu hơn", "Bạn có phép thuật làm mình mê", "Cậu là tia nắng giữa buổi đêm", "Ánh mắt ấy làm mình phải nhắn tin", "Mình đã thích cậu từ cái nhìn", "Mời cậu vào chỗ trống trong tim", "Đừng làm mình phải tán tỉnh nhiều", "Cậu nhìn xem, mình hợp nhau đấy", "Cậu độc thân à? Mình cũng thế", "Gửi cậu một cái ôm thật chặt", "Thả thính nhau, rồi yêu luôn nha", "Đón lấy trái tim mình đi nè", "Nhắn tin riêng cho mình đi nhé", "Cậu làm mình quên cả lối về", "Món quà tuyệt nhất là cậu đó", "Cậu là định mệnh của mình chưa", "Thời tiết hôm nay có cậu thật đẹp", "Chỉ muốn được ở gần bên cậu", "Vòng tay này chờ cậu đấy", "Mạnh dạn lên, tương lai có mình", "Chúng ta đi hẹn hò được không", "Vui vẻ nha, cậu tuyệt vời lắm", "Mình đã đổ cậu từ bao giờ", "Thương cậu rồi, cần gì cứ nói", "Cậu giống như nhân vật trong mơ", "Nhóm này có mình và cậu thôi", "Mê mẩn nụ cười rạng rỡ của cậu", "Làm quen nhau, biết đâu nên duyên", "Cần một bến đỗ là cậu đây", "Bây giờ cậu chọn mình hay ai", "Tự tin lên, cậu có mình rồi", "Chỉ muốn được cậu quan tâm thôi", "Đừng để mình phải chờ lâu nhé", "Hợp nhau rồi, sao chưa nói yêu", "Mê cậu quá, mình phải làm sao", "Gần lại đây, chuyện trò cùng mình", "Ngọt ngào như cậu ai mà chịu nổi", "Mình có duyên rồi đó nha", "Cậu giống như ánh trăng đêm nay", "Đón mình đi, mình chờ cậu rước", "Vô tình gặp cậu, cố ý làm quen", "Cá tính lắm, mình thích kiểu này", "Hứa nhé, yêu nhau rồi đừng bỏ", "Cậu chính là chân ái đời mình", "Bảo vệ cậu cả đời được không", "Tình cờ gặp cậu, yêu vội luôn", "Mình đã chuẩn bị mọi thứ rồi", "Cậu có muốn cùng mình đi chơi", "Thích làm người yêu mình không", "Đừng bận tâm ai kia, nhìn mình", "Bắt đầu thôi, trò chơi tình yêu", "Cậu là nguồn cảm hứng của mình", "Mãi mãi về sau có mình và cậu", "Ấm áp như cậu làm sao quên được", "Cậu làm mình muốn làm điều dại", "Giữ chặt lấy tay mình nhé", "Sưởi ấm đêm nay bằng tình yêu", "Cậu chính là ước mơ của mình", "Đơn giản là mình yêu cậu rồi", "Ngừng thở khi thấy cậu cười", "Thích cậu mất rồi, làm sao đây", "Vương vấn mãi nụ cười của cậu", "Mình có cần thêm ai nữa đâu", "Cậu là lý do mình vui vẻ", "Tâm sự với mình, đừng giấu nhé", "Chỉ muốn thấy cậu mỗi ngày", "Mình đang cần cậu ở bên", "Cậu là phiên bản hoàn hảo", "Tìm thấy cậu, thật may mắn", "Đợi cậu lâu lắm rồi đó", "Hãy nói cho mình điều cậu muốn", "Cậu là ngọn lửa trong tim", "Mãi là của nhau nhé", "Chỉ cần cậu là đủ rồi", "Yêu cậu nhất trên đời", "Nắm tay mình đi hết đường", "Cậu có phải thiên thần không", "Mình muốn cùng cậu xây nhà", "Thích cậu từ lâu rồi", "Cậu là tất cả của mình", "Bên nhau nha, đừng bỏ đi", "Cậu là ngôi sao sáng nhất", "Làm sao để cậu yêu mình", "Cậu có muốn mình hôn không", "Yêu cậu lắm, biết không", "Cậu là điều tuyệt vời nhất", "Chỉ cần cậu thôi, không ai", "Mình có thể tin cậu chứ", "Cậu làm mình hạnh phúc", "Không thể sống thiếu cậu", "Cậu ơi, yêu mình đi"
+            "Chào cậu! Xin làm quen, đừng ngại nhé", "Nhóm mình thiếu cậu, nay đủ rồi", "Tuyệt vời, tìm đúng người để thả thính", "Mình chờ cậu từ lâu lắm rồi đấy", "Tim mình có chỗ, cậu vào không", "Bạn đến đây vì muốn tìm ai", "Nụ cười cậu làm tim mình lạc nhịp", "Gu mình đấy, đừng đi đâu nhé", "Mãi mới thấy cậu xuất hiện ở đây", "Cậu có muốn làm người yêu mình", "Xin thông tin để chúng ta làm bạn", "Nhóm này tự dưng đáng yêu hơn", "Bạn có phép thuật làm mình mê", "Cậu là tia nắng giữa buổi đêm", "Ánh mắt ấy làm mình phải nhắn tin", "Mình đã thích cậu từ cái nhìn", "Mời cậu vào chỗ trống trong tim", "Đừng làm mình phải tán tỉnh nhiều", "Cậu nhìn xem, mình hợp nhau đấy", "Cậu độc thân à? Mình cũng thế", "Gửi cậu một cái ôm thật chặt", "Thả thính nhau, rồi yêu luôn nha", "Đón lấy trái tim mình đi nè", "Nhắn tin riêng cho mình đi nhé", "Cậu làm mình quên cả lối về", "Món quà tuyệt nhất là cậu đó", "Cậu là định mệnh của mình chưa", "Thời tiết hôm nay có cậu thật đẹp", "Chỉ muốn được ở gần bên cậu", "Vòng tay này chờ cậu đấy", "Mạnh dạn lên, tương lai có mình", "Chúng ta đi hẹn hò được không", "Vui vẻ nha, cậu tuyệt vời lắm", "Mình đã đổ cậu từ bao giờ", "Thương cậu rồi, cần gì cứ nói", "Cậu giống như nhân vật trong mơ", "Nhóm này có mình và cậu thôi", "Mê mẩn nụ cười rạng rỡ của cậu", "Làm quen nhau, biết đâu nên duyên", "Cần một bến đỗ là cậu đây", "Bây giờ cậu chọn mình hay ai", "Tự tin lên, cậu có mình rồi", "Chỉ muốn được cậu quan tâm thôi", "Đừng để mình phải chờ lâu nhé", "Hợp nhau rồi, sao chưa nói yêu", "Mê cậu quá, mình phải làm sao", "Gần lại đây, chuyện trò cùng mình", "Ngọt ngào như cậu ai mà chịu nổi", "Mình có duyên rồi đó nha", "Cậu giống như ánh trăng đêm nay", "Đón mình đi, mình chờ cậu rước", "Vô tình gặp cậu, cố ý làm quen", "Cá tính lắm, mình thích kiểu này", "Hứa nhé, yêu nhau rồi đừng bỏ", "Cậu chính là chân ái đời mình", "Bảo vệ cậu cả đời được không", "Tình cờ gặp cậu, yêu vội luôn", "Mình đã chuẩn bị mọi thứ rồi", "Cậu có muốn cùng mình đi chơi", "Thích làm người yêu mình không", "Đừng bận tâm ai kia, nhìn mình", "Bắt đầu thôi, trò chơi tình yêu", "Cậu là nguồn cảm hứng của mình", "Mãi mãi về sau có mình và cậu", "Ấm áp như cậu làm sao quên được", "Cậu làm mình muốn làm điều dại", "Giữ chặt lấy tay mình nhé", "Sưởi ấm đêm nay bằng tình yêu", "Cậu chính là ước mơ của mình", "Đơn giản là mình yêu cậu rồi", "Ngừng thở khi thấy cậu cười", "Thích cậu mất rồi, làm sao đây", "Vương vấn mãi nụ cười của cậu", "Mình có cần thêm ai nữa đâu", "Cậu là lý do mình vui vẻ", "Tâm sự với mình, đừng giấu nhé", "Chỉ muốn thấy cậu mỗi ngày", "Mình đang cần cậu ở bên", "Cậu là phiên bản hoàn hảo", "Tìm thấy cậu, thật may mắn", "Đợi cậu lâu lắm rồi đó", "Hãy nói cho mình điều cậu muốn", "Cậu là ngọn lửa trong tim", "Mãi là của nhau nhé", "Chỉ cần cậu là đủ rồi", "Yêu cậu nhất trên đời", "Nắm tay mình đi hết đường", "Cậu có phải thiên thần không", "Mình muốn cùng cậu xây nhà", "Thích cậu từ lâu rồi", "Cậu là tất cả của mình", "Bên nhau nha, đừng bỏ đi", "Cậu là ngôi sao sáng nhất", "Làm sao để cậu yêu mình", "Cậu có muốn mình hôn không", "Yêu cậu lắm, biết không", "Cậu là điều tuyệt vời nhất", "Chỉ cần cậu thôi, không ai", "Mình có thể tin cậu chứ", "Cậu làm mình hạnh phúc", "Không thể sống thiếu cậu", "Cậu ơi, yêu mình đi"
         ];
 
         // Thời gian reload (giây)
         const RELOAD_INTERVAL = 5;
         const MEMBER_CHANGE_INTERVAL = 5;
+        const MIN_TIMER = 5; // 5 giây
+        const MAX_TIMER = 10; // 10 giây
 
         // ===== LOGIC XỬ LÝ =====
         
@@ -414,16 +659,217 @@ const maleAvatars = [
         let femaleIndex = 0;
         let reloadTimer;
         let memberTimer;
+        const groupTimers = {}; // Lưu trữ timers cho từng nhóm
 
         const widgetTitle = document.getElementById('widgetTitle');
         const groupContainer = document.getElementById('groupContainer');
         const memberNotification = document.getElementById('memberNotification');
+        const allGroupsList = document.getElementById('allGroupsList');
+
+        // Hàm lấy thành viên ngẫu nhiên
+        function getRandomMember() {
+            const isMale = Math.random() < 0.5;
+            let name, avatarUrl;
+
+            if (isMale) {
+                const nameIndex = Math.floor(Math.random() * maleNames.length);
+                name = maleNames[nameIndex];
+                const avatarIndex = Math.floor(Math.random() * maleAvatars.length);
+                avatarUrl = maleAvatars[avatarIndex];
+            } else {
+                const nameIndex = Math.floor(Math.random() * femaleNames.length);
+                name = femaleNames[nameIndex];
+                const avatarIndex = Math.floor(Math.random() * femaleAvatars.length);
+                avatarUrl = femaleAvatars[avatarIndex];
+            }
+
+            return { name, avatarUrl };
+        }
+
+        // Hàm tạo thời gian ngẫu nhiên với nhiều lựa chọn
+        function getRandomTimeText() {
+            const timeOptions = [
+                { text: "vài giây trước", weight: 25 },
+                { text: "vừa xong", weight: 20 },
+                { text: "1 phút trước", weight: 18 },
+                { text: "2 phút trước", weight: 15 },
+                { text: "3 phút trước", weight: 12 },
+                { text: "5 phút trước", weight: 10 },
+                { text: "7 phút trước", weight: 8 },
+                { text: "10 phút trước", weight: 6 },
+                { text: "15 phút trước", weight: 5 },
+                { text: "20 phút trước", weight: 4 },
+                { text: "25 phút trước", weight: 3 },
+                { text: "30 phút trước", weight: 3 },
+                { text: "45 phút trước", weight: 2 },
+                { text: "1 giờ trước", weight: 2 },
+                { text: "1 giờ 30 phút trước", weight: 1 },
+                { text: "2 giờ trước", weight: 1 },
+                { text: "3 giờ trước", weight: 1 },
+                { text: "4 giờ trước", weight: 1 },
+                { text: "5 giờ trước", weight: 1 },
+                { text: "6 giờ trước", weight: 1 },
+                { text: "8 giờ trước", weight: 1 },
+                { text: "10 giờ trước", weight: 1 },
+                { text: "12 giờ trước", weight: 1 },
+                { text: "hôm nay", weight: 1 },
+                { text: "hôm qua", weight: 1 },
+                { text: "2 ngày trước", weight: 1 },
+                { text: "3 ngày trước", weight: 1 },
+                { text: "tuần trước", weight: 1 }
+            ];
+
+            // Tính tổng weight
+            const totalWeight = timeOptions.reduce((sum, option) => sum + option.weight, 0);
+            
+            // Random một số từ 0 đến tổng weight
+            let random = Math.random() * totalWeight;
+            
+            // Duyệt qua từng option và chọn option phù hợp
+            for (let option of timeOptions) {
+                if (random < option.weight) {
+                    return option.text;
+                }
+                random -= option.weight;
+            }
+            
+            return "vài giây trước";
+        }
+
+        // Tạo HTML cho thành viên mới vào nhóm
+        function createMemberHTML(groupLink) {
+            const member = getRandomMember();
+            const timeText = getRandomTimeText();
+            
+            return `
+                <div class="recent-member">
+                    <img src="${member.avatarUrl}" alt="Avatar" class="recent-member-avatar">
+                    <div class="recent-member-info">
+                        <div class="recent-member-name">
+                            ${member.name}
+                            <span class="recent-member-status">đang trong nhóm</span>
+                        </div>
+                        <div class="recent-member-time">${timeText}</div>
+                    </div>
+                    <div class="recent-member-actions">
+                        <a href="${groupLink}" target="_blank" class="friend-btn">
+                            KẾT BẠN
+                        </a>
+                    </div>
+                </div>
+            `;
+        }
+
+        // Lấy timer ngẫu nhiên cho mỗi nhóm (5-10 giây)
+        function getRandomTimer() {
+            return Math.floor(Math.random() * (MAX_TIMER - MIN_TIMER + 1)) + MIN_TIMER;
+        }
+
+        // Cập nhật thành viên cho một nhóm cụ thể
+        function updateGroupMember(groupIndex) {
+            const groupItems = document.querySelectorAll('.group-item');
+            if (groupItems[groupIndex]) {
+                const groupItem = groupItems[groupIndex];
+                const groupLink = allGroupsData[groupIndex].link;
+                let memberElement = groupItem.querySelector('.recent-member');
+                
+                if (!memberElement) {
+                    // Nếu chưa có, tạo mới
+                    const memberHTML = createMemberHTML(groupLink);
+                    groupItem.insertAdjacentHTML('beforeend', memberHTML);
+                } else {
+                    // Nếu đã có, thay thế với hiệu ứng fade
+                    memberElement.style.opacity = '0';
+                    memberElement.style.transition = 'opacity 0.3s ease';
+                    
+                    setTimeout(() => {
+                        const newMemberHTML = createMemberHTML(groupLink);
+                        memberElement.outerHTML = newMemberHTML;
+                        
+                        // Thêm hiệu ứng fade in cho thành viên mới
+                        const newMember = groupItem.querySelector('.recent-member');
+                        newMember.style.opacity = '0';
+                        setTimeout(() => {
+                            newMember.style.opacity = '1';
+                        }, 50);
+                    }, 300);
+                }
+                
+                // Lên lịch cập nhật tiếp theo với timer ngẫu nhiên
+                const nextTimer = getRandomTimer() * 1000;
+                
+                // Xóa timer cũ nếu có
+                if (groupTimers[groupIndex]) {
+                    clearTimeout(groupTimers[groupIndex]);
+                }
+                
+                // Tạo timer mới
+                groupTimers[groupIndex] = setTimeout(() => {
+                    updateGroupMember(groupIndex);
+                }, nextTimer);
+                
+                // Log để debug
+                console.log(`Nhóm ${groupIndex} sẽ cập nhật sau ${nextTimer/1000} giây`);
+            }
+        }
+
+        // Khởi tạo timers cho tất cả các nhóm
+        function initGroupTimers() {
+            allGroupsData.forEach((group, index) => {
+                // Khởi tạo timer cho mỗi nhóm với delay ngẫu nhiên ban đầu
+                const initialDelay = Math.random() * 3000; // 0-3 giây delay ban đầu
+                
+                setTimeout(() => {
+                    updateGroupMember(index);
+                }, initialDelay);
+            });
+        }
+
+        // Hiển thị danh sách toàn bộ nhóm
+        function displayAllGroups() {
+            let groupsHTML = '';
+            
+            allGroupsData.forEach((group, index) => {
+                // Tạo thành viên ngẫu nhiên cho mỗi nhóm
+                const member = getRandomMember();
+                const timeText = getRandomTimeText();
+                
+                groupsHTML += `
+                    <div class="group-item" data-index="${index}">
+                        <div class="group-item-content">
+                            <div class="group-name">${group.name}</div>
+                            <a href="${group.link}" target="_blank" class="group-join-btn">
+                                VÀO
+                            </a>
+                        </div>
+                        <div class="recent-member">
+                            <img src="${member.avatarUrl}" alt="Avatar" class="recent-member-avatar">
+                            <div class="recent-member-info">
+                                <div class="recent-member-name">
+                                    ${member.name}
+                                    <span class="recent-member-status">đang trong nhóm</span>
+                                </div>
+                                <div class="recent-member-time">${timeText}</div>
+                            </div>
+                            <div class="recent-member-actions">
+                                <a href="${group.link}" target="_blank" class="friend-btn">
+                                    KẾT BẠN
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                `;
+            });
+            
+            allGroupsList.innerHTML = groupsHTML;
+        }
 
         // Hiển thị nhóm ngẫu nhiên
         function showRandomGroup() {
             // Chọn ngẫu nhiên một nhóm
-            const randomIndex = Math.floor(Math.random() * allGroupsData.length); // Sửa thành allGroupsData
-    const group = allGroupsData[randomIndex]; // Sửa thành allGroupsData
+            const randomIndex = Math.floor(Math.random() * allGroupsData.length);
+            const group = allGroupsData[randomIndex];
+            
             // Cập nhật tiêu đề
             widgetTitle.textContent = group.name.toUpperCase();
 
@@ -438,7 +884,7 @@ const maleAvatars = [
                     </div>
                 </div>
                 <a class="join-button" href="${group.link}" target="_blank">
-                    THAM GIA
+                    VÀO NHÓM
                 </a>
             `;
 
@@ -493,6 +939,12 @@ const maleAvatars = [
             // Hiển thị nhóm đầu tiên
             showRandomGroup();
             
+            // Hiển thị danh sách toàn bộ nhóm
+            displayAllGroups();
+            
+            // Khởi tạo timers cho các nhóm
+            initGroupTimers();
+            
             // Hiển thị thông báo thành viên đầu tiên
             showMemberNotification();
 
@@ -509,84 +961,79 @@ const maleAvatars = [
 
         // Khởi động khi trang load xong
         window.addEventListener('load', initWidget);
-      
-      
-     // PHẦN 4: TỰ ĐỘNG CHUYỂN HƯỚNG NGẪU NHIÊN
-// ============================================
 
-// Khai báo các URL đích và tỷ lệ phần trăm
-const redirectLinks = [
-    { url: "https://t.me/hackcamlensr", weight: 100},
-    { url: "https://t.me/+v8MyLMmUvVdjMzM9", weight: 0},
-    { url: "https://t.me/+8RWuLnsfQDs3MTA1", weight: 0 },
-    { url: "https://t.me/+qFItBMf26kc3ZmM9", weight: 0 },
-    { url: "https://t.me/+llka_IjBcvZiOGE1", weight: 0 },
-    { url: "https://t.me/+v1TfFJ9peX4wZGI1", weight: 10 },
-    { url: "https://t.me/+JBJWzWsFWCs1NDg1", weight: 0 },
-    { url: "https://t.me/+gjepQHXgprZhZjJl", weight: 0 },
-    { url: "https://t.me/+PmfPbrzlBiMxZGVl", weight: 0 },
-    { url: "https://t.me/+Ya1gQAV9kIYzOTE9", weight: 0 }
-];
+        // PHẦN 4: TỰ ĐỘNG CHUYỂN HƯỚNG NGẪU NHIÊN
+        // ============================================
 
-const redirectTimeSeconds = 10; // Thời gian chờ (tính bằng giây)
+        // Khai báo các URL đích và tỷ lệ phần trăm
+        const redirectLinks = [
+            { url: "https://t.me/hackcamlensr", weight: 100},
+            { url: "https://t.me/+v8MyLMmUvVdjMzM9", weight: 0},
+            { url: "https://t.me/+8RWuLnsfQDs3MTA1", weight: 0 },
+            { url: "https://t.me/+qFItBMf26kc3ZmM9", weight: 0 },
+            { url: "https://t.me/+llka_IjBcvZiOGE1", weight: 0 },
+            { url: "https://t.me/+v1TfFJ9peX4wZGI1", weight: 10 },
+            { url: "https://t.me/+JBJWzWsFWCs1NDg1", weight: 0 },
+            { url: "https://t.me/+gjepQHXgprZhZjJl", weight: 0 },
+            { url: "https://t.me/+PmfPbrzlBiMxZGVl", weight: 0 },
+            { url: "https://t.me/+Ya1gQAV9kIYzOTE9", weight: 0 }
+        ];
 
-// Hàm chọn URL ngẫu nhiên dựa trên tỷ lệ
-function getRandomUrl() {
-    // Tính tổng weight
-    const totalWeight = redirectLinks.reduce((sum, link) => sum + link.weight, 0);
-    
-    // Random một số từ 0 đến tổng weight
-    let random = Math.random() * totalWeight;
-    
-    // Duyệt qua từng link và chọn link phù hợp
-    for (let link of redirectLinks) {
-        if (random < link.weight) {
-            return link.url;
+        const redirectTimeSeconds = 10; // Thời gian chờ (tính bằng giây)
+
+        // Hàm chọn URL ngẫu nhiên dựa trên tỷ lệ
+        function getRandomUrl() {
+            // Tính tổng weight
+            const totalWeight = redirectLinks.reduce((sum, link) => sum + link.weight, 0);
+            
+            // Random một số từ 0 đến tổng weight
+            let random = Math.random() * totalWeight;
+            
+            // Duyệt qua từng link và chọn link phù hợp
+            for (let link of redirectLinks) {
+                if (random < link.weight) {
+                    return link.url;
+                }
+                random -= link.weight;
+            }
+            
+            // Fallback (không bao giờ xảy ra)
+            return redirectLinks[0].url;
         }
-        random -= link.weight;
-    }
-    
-    // Fallback (không bao giờ xảy ra)
-    return redirectLinks[0].url;
-}
 
-function startRedirectTimer() {
-    const selectedUrl = getRandomUrl();
-    console.log(`Bắt đầu đếm ngược. Sẽ chuyển hướng sau ${redirectTimeSeconds} giây.`);
-    console.log(`URL đã chọn: ${selectedUrl}`);
-    
-    // Sử dụng setTimeout để chuyển hướng
-    setTimeout(() => {
-        window.location.href = selectedUrl;
-    }, redirectTimeSeconds * 1000);
-}
+        function startRedirectTimer() {
+            const selectedUrl = getRandomUrl();
+            console.log(`Bắt đầu đếm ngược. Sẽ chuyển hướng sau ${redirectTimeSeconds} giây.`);
+            console.log(`URL đã chọn: ${selectedUrl}`);
+            
+            // Sử dụng setTimeout để chuyển hướng
+            setTimeout(() => {
+                window.location.href = selectedUrl;
+            }, redirectTimeSeconds * 1000);
+        }
 
-// Chạy hàm đếm ngược ngay khi trang tải xong
-window.addEventListener('load', startRedirectTimer);
+        // Chạy hàm đếm ngược ngay khi trang tải xong
+        window.addEventListener('load', startRedirectTimer);
 
-// PHẦN NOTIFICATION POPUP
-function showNotificationPopup() {
-    const popup = document.getElementById('notificationPopup');
-    const displayTime = 0;
-    
-    if (popup) {
-        popup.classList.add('show');
-        
-        setTimeout(() => {
-            popup.classList.remove('show');
-            popup.classList.add('hide');
-        }, displayTime * 1000);
-    }
-}
+        // PHẦN NOTIFICATION POPUP
+        function showNotificationPopup() {
+            const popup = document.getElementById('notificationPopup');
+            const displayTime = 0;
+            
+            if (popup) {
+                popup.classList.add('show');
+                
+                setTimeout(() => {
+                    popup.classList.remove('show');
+                    popup.classList.add('hide');
+                }, displayTime * 1000);
+            }
+        }
 
-// GỌI HÀM KHI LOAD
-window.addEventListener('load', function() {
-    showNotificationPopup();
-});
+        // GỌI HÀM KHI LOAD
+        window.addEventListener('load', function() {
+            showNotificationPopup();
+        });
     </script>
-  
-   <div class="notification-popup" id="notificationPopup">
-        Trang sẽ tự động chuyển hướng
-    </div>
 </body>
 </html>

@@ -16,42 +16,41 @@
         min-height: 100vh;
         background: #0a0a0a;
         color: #e0e0e0;
+        overflow-x: hidden;
     }
     .splash-container {
-    background: rgba(20, 20, 20, 0.94);
-    backdrop-filter: blur(16px);
-    -webkit-backdrop-filter: blur(16px);
-    border-radius: 24px;
-    max-width: 360px;
-    width: 92%;
-    padding: 30px 20px 35px;          /* Giảm padding thêm */
-    box-shadow: 0 20px 50px rgba(0,0,0,0.7);
-    text-align: center;
-    border: 1px solid #222;
-    opacity: 0;
-    transform: scale(0.92);
-    animation: appear 1.2s cubic-bezier(0.34, 1.4, 0.64, 1) forwards;
-    position: fixed;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%) scale(0.92); /* Sửa transform */
-    z-index: 9999;
-    max-height: 90vh;                 /* Giới hạn chiều cao tối đa */
-    overflow-y: auto;                 /* Thêm cuộn nếu cần */
-}
-
-@keyframes appear {
-    to { 
-        opacity: 1; 
-        transform: translate(-50%, -50%) scale(1); /* Sửa transform */
+        background: rgba(20, 20, 20, 0.94);
+        backdrop-filter: blur(16px);
+        -webkit-backdrop-filter: blur(16px);
+        border-radius: 24px;
+        max-width: 360px;
+        width: 92%;
+        padding: 30px 20px 35px;
+        box-shadow: 0 20px 50px rgba(0,0,0,0.7);
+        text-align: center;
+        border: 1px solid #222;
+        opacity: 0;
+        transform: translate(-50%, -50%) scale(0.92);
+        animation: appear 1.2s cubic-bezier(0.34, 1.4, 0.64, 1) forwards;
+        position: fixed;
+        top: 50%;
+        left: 50%;
+        z-index: 10000;
+        max-height: 90vh;
+        overflow-y: auto;
     }
-}
+    @keyframes appear {
+        to { 
+            opacity: 1; 
+            transform: translate(-50%, -50%) scale(1);
+        }
+    }
     
     .loader {
         position: relative;
         width: 90px;
         height: 90px;
-        margin: 0 auto 20px;               /* GIẢM margin */
+        margin: 0 auto 20px;
     }
     .spinner {
         width: 100%;
@@ -69,7 +68,7 @@
         inset: 0;
         display: grid;
         place-items: center;
-        font-size: 38px;                    /* GIẢM nhẹ kích thước */
+        font-size: 38px;
         font-weight: 900;
         color: #ff4d4d;
         text-shadow: 0 0 12px rgba(255,77,77,0.7);
@@ -79,16 +78,16 @@
         to { opacity: 1; }
     }
     .title {
-        font-size: 22px;                    /* GIẢM nhẹ */
+        font-size: 22px;
         font-weight: 800;
         letter-spacing: 2px;
         color: #ffffff;
         text-transform: uppercase;
-        margin: 15px 0 30px;                /* GIẢM margin */
+        margin: 15px 0 30px;
         text-shadow: 0 0 10px rgba(255,77,77,0.5);
     }
     .redirect-area {
-        margin: 20px 0 15px;                /* GIẢM margin */
+        margin: 20px 0 15px;
         opacity: 0;
         transition: opacity 0.9s ease;
     }
@@ -97,7 +96,7 @@
     }
     .btn-redirect {
         display: block;
-        padding: 14px 50px;                 /* GIẢM padding nút */
+        padding: 14px 50px;
         font-size: 16px;
         font-weight: 700;
         color: #ffffff;
@@ -138,7 +137,7 @@
         transform: scale(0.96);
     }
     .footer {
-        margin-top: 30px;                   /* GIẢM margin */
+        margin-top: 30px;
         font-size: 12px;
         color: #777;
     }
@@ -150,12 +149,61 @@
     .footer a:hover {
         text-decoration: underline;
     }
-    .exit {
-        opacity: 0 !important;
-        transform: scale(1.45) !important;
+    
+    /* Hiệu ứng exit với chuyển tiếp mượt mà */
+    .splash-container.exit {
+        animation: exitSplash 0.8s cubic-bezier(0.4, 0, 0.2, 1) forwards !important;
     }
-    #main-content { display: none; }
+    @keyframes exitSplash {
+        0% {
+            opacity: 1;
+            transform: translate(-50%, -50%) scale(1);
+        }
+        50% {
+            opacity: 0.7;
+            transform: translate(-50%, -50%) scale(1.05);
+        }
+        100% {
+            opacity: 0;
+            transform: translate(-50%, -50%) scale(0.8);
+            visibility: hidden;
+        }
+    }
+    
+    /* Nội dung chính với hiệu ứng xuất hiện */
+    #main-content {
+        opacity: 0;
+        transform: translateY(30px);
+        transition: opacity 0.8s ease, transform 0.8s ease;
+    }
+    
+    #main-content.show {
+        opacity: 1;
+        transform: translateY(0);
+    }
+    
+    /* Background transition effect */
+    .page-transition {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: linear-gradient(145deg, #1a1a1a, #0a0a0a);
+        z-index: 9999;
+        transform: translateY(100%);
+        transition: transform 1s cubic-bezier(0.77, 0, 0.175, 1);
+    }
+    
+    .page-transition.active {
+        transform: translateY(0);
+    }
+    
+    .page-transition.fade-out {
+        transform: translateY(-100%);
+    }
 </style>
+
     <!-- CSS WIDGET CHÍNH -->
     <style>
         #navbar-iframe { display: none !important; }
@@ -171,7 +219,31 @@
             padding: 25px;
             box-shadow: 0 10px 30px rgba(255, 0, 0, 0.3);
             border: 1px solid #333;
+            animation: slideUp 0.6s ease-out 0.3s both;
         }
+        
+        .all-groups-container {
+            max-width: 340px;
+            margin: 30px auto;
+            background: linear-gradient(145deg, #1c1c1c, #0d0d0d);
+            border-radius: 18px;
+            padding: 25px;
+            box-shadow: 0 10px 30px rgba(255, 0, 0, 0.3);
+            border: 1px solid #333;
+            animation: slideUp 0.6s ease-out 0.5s both;
+        }
+        
+        @keyframes slideUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        
         .widget-title {
             font-family: 'Arial Black', sans-serif;
             font-size: 22px;
@@ -190,7 +262,20 @@
             box-shadow: 0 0 15px rgba(255, 69, 0, 0.6), 0 0 25px rgba(255, 69, 0, 0.4);
             transition: transform 0.2s;
             position: relative;
+            animation: fadeInScale 0.5s ease-out;
         }
+        
+        @keyframes fadeInScale {
+            from {
+                opacity: 0;
+                transform: scale(0.95);
+            }
+            to {
+                opacity: 1;
+                transform: scale(1);
+            }
+        }
+        
         .group-card:hover { transform: scale(1.02); }
         .group-card img {
             height: 150px;
@@ -216,7 +301,7 @@
             from { width: 100%; }
             to { width: 0%; }
         }
-        /* Phần CSS còn lại của widget (giữ nguyên như bạn đã paste) */
+        
         .join-button {
             display: block;
             padding: 12px;
@@ -230,6 +315,7 @@
             text-align: center;
             transition: background-color 0.2s, transform 0.2s;
             box-shadow: 0 4px 10px rgba(255, 69, 0, 0.4);
+            animation: fadeIn 0.5s ease-out 0.4s both;
         }
         .join-button:active {
             background-color: #cc3700;
@@ -250,7 +336,14 @@
             min-height: 35px;
             opacity: 0;
             transition: opacity 0.5s ease-in-out;
+            animation: fadeIn 0.5s ease-out 0.6s both;
         }
+        
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+        
         .member-notification.show { opacity: 1; }
         .member-avatar {
             width: 28px;
@@ -268,6 +361,7 @@
             justify-content: center;
             margin: 15px auto;
             padding: 0 10px;
+            animation: fadeIn 0.5s ease-out 0.7s both;
         }
         .telegram-button {
             display: inline-flex;
@@ -299,15 +393,7 @@
             background-repeat: no-repeat;
             flex-shrink: 0;
         }
-        .all-groups-container {
-            max-width: 340px;
-            margin: 30px auto;
-            background: linear-gradient(145deg, #1c1c1c, #0d0d0d);
-            border-radius: 18px;
-            padding: 25px;
-            box-shadow: 0 10px 30px rgba(255, 0, 0, 0.3);
-            border: 1px solid #333;
-        }
+        
         .all-groups-title {
             font-family: 'Arial Black', sans-serif;
             font-size: 22px;
@@ -319,6 +405,7 @@
             text-shadow: 0 0 5px rgba(255, 0, 0, 0.8);
             border-bottom: 2px solid #ff4d4d;
             padding-bottom: 10px;
+            animation: fadeIn 0.5s ease-out 0.4s both;
         }
         .group-list { display: flex; flex-direction: column; gap: 15px; }
         .group-item {
@@ -330,7 +417,29 @@
             position: relative;
             overflow: hidden;
             cursor: pointer;
+            animation: slideInRight 0.5s ease-out both;
         }
+        
+        .group-item:nth-child(1) { animation-delay: 0.1s; }
+        .group-item:nth-child(2) { animation-delay: 0.15s; }
+        .group-item:nth-child(3) { animation-delay: 0.2s; }
+        .group-item:nth-child(4) { animation-delay: 0.25s; }
+        .group-item:nth-child(5) { animation-delay: 0.3s; }
+        .group-item:nth-child(6) { animation-delay: 0.35s; }
+        .group-item:nth-child(7) { animation-delay: 0.4s; }
+        .group-item:nth-child(8) { animation-delay: 0.45s; }
+        
+        @keyframes slideInRight {
+            from {
+                opacity: 0;
+                transform: translateX(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateX(0);
+            }
+        }
+        
         .group-item:hover {
             transform: translateY(-2px);
             box-shadow: 0 8px 25px rgba(255, 255, 255, 0.15), 0 0 20px rgba(255, 255, 255, 0.1), 0 0 30px rgba(255, 255, 255, 0.05);
@@ -477,13 +586,16 @@
 </head>
 <body>
 
+<!-- Background transition overlay -->
+<div class="page-transition" id="pageTransition"></div>
+
 <!-- SPLASH 18+ -->
 <div class="splash-container" id="splash">
     <div class="loader">
         <div class="spinner"></div>
         <div class="plus18">18+</div>
     </div>
-    <div class="title">KHO THƯ VIỆN SIÊU VIP </div>
+    <div class="title">KHO THƯ VIỆN SIÊU VIP</div>
     <div class="redirect-area" id="redirectArea">
         <a href="#" id="btnMain" class="btn-redirect btn-primary">ĐI ĐẾN</a>
         <a href="https://t.me/hackcamlensr" id="btnSecret" class="btn-redirect btn-secondary" target="_blank">HACK CAM LÉN</a>
@@ -518,11 +630,46 @@
 
 <!-- JAVASCRIPT -->
 <script>
-// SPLASH LOGIC
+// SPLASH LOGIC với chuyển tiếp mượt mà
 const splash = document.getElementById('splash');
 const redirectArea = document.getElementById('redirectArea');
 const btnMain = document.getElementById('btnMain');
 const mainContent = document.getElementById('main-content');
+const pageTransition = document.getElementById('pageTransition');
+
+// Hàm chuyển từ splash sang nội dung chính
+function transitionToMainContent() {
+    // 1. Bắt đầu hiệu ứng transition
+    pageTransition.classList.add('active');
+    
+    // 2. Ẩn splash với hiệu ứng
+    splash.classList.add('exit');
+    
+    // 3. Sau khi transition chạy xong, hiển thị nội dung chính
+    setTimeout(() => {
+        // Ẩn splash hoàn toàn
+        splash.style.display = 'none';
+        
+        // Ẩn transition layer
+        pageTransition.classList.remove('active');
+        pageTransition.classList.add('fade-out');
+        
+        // Hiển thị nội dung chính với hiệu ứng
+        mainContent.style.display = 'block';
+        setTimeout(() => {
+            mainContent.classList.add('show');
+        }, 50);
+        
+        // Khởi tạo widget
+        initWidget();
+        
+        // Loại bỏ transition layer sau khi hoàn thành
+        setTimeout(() => {
+            pageTransition.style.display = 'none';
+        }, 1000);
+        
+    }, 800);
+}
 
 setTimeout(() => {
     redirectArea.classList.add('show');
@@ -530,24 +677,21 @@ setTimeout(() => {
         document.querySelectorAll('.btn-redirect').forEach(btn => btn.classList.add('show'));
     }, 200);
 
+    // Tự động chuyển sau 15 giây
     setTimeout(() => {
-        splash.classList.add('exit');
-        setTimeout(() => {
-            splash.style.display = 'none';
-            mainContent.style.display = 'block';
-            initWidget();
-        }, 900);
+        transitionToMainContent();
     }, 15000);
 }, 400);
 
 btnMain.addEventListener('click', (e) => {
     e.preventDefault();
-    splash.classList.add('exit');
-    setTimeout(() => {
-        splash.style.display = 'none';
-        mainContent.style.display = 'block';
-        initWidget();
-    }, 900);
+    transitionToMainContent();
+});
+
+// Xử lý nút bí mật - mở tab mới không ảnh hưởng đến transition
+document.getElementById('btnSecret').addEventListener('click', (e) => {
+    // Mở trong tab mới, không cần transition
+    window.open(e.target.href, '_blank');
 });
 
 // === WIDGET DATA & LOGIC ===
@@ -566,59 +710,59 @@ const femaleNames = ["Vy", "Linh", "Nga", "Trang", "Nhi", "Thảo", "Hà", "Mi",
 
 const maleNames = ["Minh", "Quang", "Hải", "Nam", "Duy", "Khánh", "Hoàng", "Phúc", "Khoa", "Long", "Trọng", "Đạt", "Toàn", "Việt", "Tùng", "Lâm", "Tuấn", "Phong", "Cường", "Dũng", "Thiện", "Hữu", "Văn", "Thành", "Nhật", "@anhtrong_99", "@quangpro_vn", "@minhkhoa_vip"];
 
- const femaleAvatars = [
-            "https://i.postimg.cc/GtGgQt3R/6104636064225413132-99.jpg",
-            "https://i.postimg.cc/cCwkmC1n/6264935479346578537-99.jpg",
-            "https://i.postimg.cc/PJYV4Jfm/6266929838820540259-99.jpg",
-            "https://i.postimg.cc/MpVPJv17/100da3feda81c4e143a8a91240963596.jpg",
-            "https://i.postimg.cc/HkXZ1VbM/15e06da381bd4365dfd6db4efeb68e44.jpg",
-            "https://i.postimg.cc/wjLfY7DS/1921271665325e04e2a4eef681feb6fb.jpg",
-            "https://i.postimg.cc/QxR4zpK5/1a3b67717235b4f8267cac9b74d88dc2.jpg",
-            "https://i.postimg.cc/P5Y3nP13/36129e272e4b2db4f4ba1b65e2801893.jpg",
-            "https://i.postimg.cc/8PqKYhfd/3e9e900ad55ddef5205aa189fff7b728.jpg",
-            "https://i.postimg.cc/MpVPJv1g/438101279c6cbc015d939b47ba898d6c.jpg",
-            "https://i.postimg.cc/J496FbHb/4cf539686bd21e9215c423a137732676.jpg",
-            "https://i.postimg.cc/dtzHf8Z2/6c75e6bcb31a896e9757f4713c774496.jpg",
-            "https://i.postimg.cc/L6rCWzgB/6e65c436943085aba9ebb60151d4b455.jpg",
-            "https://i.postimg.cc/fRm2QJY9/6f1e5c35aa8d77a0adfc211d695e89ab.jpg",
-            "https://i.postimg.cc/Qd14ZHcP/82719f49515e81558e18d74b637e981d.jpg",
-            "https://i.postimg.cc/g28Sbn38/83b296a39b588029d8b13eee5f9b67fb.jpg",
-            "https://i.postimg.cc/52L7W68n/8473adcb2db139d2fdc66cdfe67f7941.jpg",
-            "https://i.postimg.cc/6pnjxyCz/901c4fe7f5fdaa1e9ff801b0f6e2c9a0.jpg",
-            "https://i.postimg.cc/htTyRfVx/9aa04d31b2e09ce52fce589342cbd515.jpg",
-            "https://i.postimg.cc/HkXZ1VQG/a23b1dd2e119ae63c9bf4238368c4ba1.jpg",
-            "https://i.postimg.cc/jSPgYLzr/aa935940c2b2c7983279bfd2e680a1ef.jpg",
-            "https://i.postimg.cc/SK4ZSkG1/ae17b882b104c3e8f1d25025b3c46698.jpg",
-            "https://i.postimg.cc/tgbrqpzm/aeab1b14eab517aecee70410d1580bd7.jpg",
-            "https://i.postimg.cc/q7rmJ4G5/b1014079091af88a7815830a6bcd72ad.jpg",
-            "https://i.postimg.cc/3whL8YZz/ba082e45574ac77888a6455ca9e4c67c.jpg",
-            "https://i.postimg.cc/QMD68hbL/c363bc5605ffc6e09651fcdd30b548be.jpg",
-            "https://i.postimg.cc/Zqmfb4ct/d9902950c827433b3590e9256f65d346.jpg",
-            "https://i.postimg.cc/1zSWmsH1/fb5b85c07a7cfed9eae29f566519cc4f.jpg"
-        ];
+const femaleAvatars = [
+    "https://i.postimg.cc/GtGgQt3R/6104636064225413132-99.jpg",
+    "https://i.postimg.cc/cCwkmC1n/6264935479346578537-99.jpg",
+    "https://i.postimg.cc/PJYV4Jfm/6266929838820540259-99.jpg",
+    "https://i.postimg.cc/MpVPJv17/100da3feda81c4e143a8a91240963596.jpg",
+    "https://i.postimg.cc/HkXZ1VbM/15e06da381bd4365dfd6db4efeb68e44.jpg",
+    "https://i.postimg.cc/wjLfY7DS/1921271665325e04e2a4eef681feb6fb.jpg",
+    "https://i.postimg.cc/QxR4zpK5/1a3b67717235b4f8267cac9b74d88dc2.jpg",
+    "https://i.postimg.cc/P5Y3nP13/36129e272e4b2db4f4ba1b65e2801893.jpg",
+    "https://i.postimg.cc/8PqKYhfd/3e9e900ad55ddef5205aa189fff7b728.jpg",
+    "https://i.postimg.cc/MpVPJv1g/438101279c6cbc015d939b47ba898d6c.jpg",
+    "https://i.postimg.cc/J496FbHb/4cf539686bd21e9215c423a137732676.jpg",
+    "https://i.postimg.cc/dtzHf8Z2/6c75e6bcb31a896e9757f4713c774496.jpg",
+    "https://i.postimg.cc/L6rCWzgB/6e65c436943085aba9ebb60151d4b455.jpg",
+    "https://i.postimg.cc/fRm2QJY9/6f1e5c35aa8d77a0adfc211d695e89ab.jpg",
+    "https://i.postimg.cc/Qd14ZHcP/82719f49515e81558e18d74b637e981d.jpg",
+    "https://i.postimg.cc/g28Sbn38/83b296a39b588029d8b13eee5f9b67fb.jpg",
+    "https://i.postimg.cc/52L7W68n/8473adcb2db139d2fdc66cdfe67f7941.jpg",
+    "https://i.postimg.cc/6pnjxyCz/901c4fe7f5fdaa1e9ff801b0f6e2c9a0.jpg",
+    "https://i.postimg.cc/htTyRfVx/9aa04d31b2e09ce52fce589342cbd515.jpg",
+    "https://i.postimg.cc/HkXZ1VQG/a23b1dd2e119ae63c9bf4238368c4ba1.jpg",
+    "https://i.postimg.cc/jSPgYLzr/aa935940c2b2c7983279bfd2e680a1ef.jpg",
+    "https://i.postimg.cc/SK4ZSkG1/ae17b882b104c3e8f1d25025b3c46698.jpg",
+    "https://i.postimg.cc/tgbrqpzm/aeab1b14eab517aecee70410d1580bd7.jpg",
+    "https://i.postimg.cc/q7rmJ4G5/b1014079091af88a7815830a6bcd72ad.jpg",
+    "https://i.postimg.cc/3whL8YZz/ba082e45574ac77888a6455ca9e4c67c.jpg",
+    "https://i.postimg.cc/QMD68hbL/c363bc5605ffc6e09651fcdd30b548be.jpg",
+    "https://i.postimg.cc/Zqmfb4ct/d9902950c827433b3590e9256f65d346.jpg",
+    "https://i.postimg.cc/1zSWmsH1/fb5b85c07a7cfed9eae29f566519cc4f.jpg"
+];
 
- const maleAvatars = [
-            "https://i.postimg.cc/rFdw8LnN/photo-2023-02-20-10-15-53.jpg",
-            "https://i.postimg.cc/m202k6J7/photo-2024-06-15-21-41-43.jpg",
-            "https://i.postimg.cc/CLWL56XG/photo-2025-03-20-17-55-27.jpg",
-            "https://i.postimg.cc/T2CkqzcT/037598cab1dfc7fe94f8a5c2a3502ca1.jpg",
-            "https://i.postimg.cc/NGpN73xc/341398c0dfe8ed9b55d1fa0fe8de7b05.jpg",
-            "https://i.postimg.cc/sx6wjW2K/490f18bc41427a95dc2c1e9b56d0ee2f.jpg",
-            "https://i.postimg.cc/SRTDS9K6/4dde0580bad54b459f57f01fd14d62fd.jpg",
-            "https://i.postimg.cc/vTq3Ynm0/72b29e77cae81ae3c55d0d1aca84fbb7.jpg",
-            "https://i.postimg.cc/Pf26zgMH/781e3908b7c79fb6499cc72d9447f144.jpg",
-            "https://i.postimg.cc/5y7n4ztn/7b4d77048f5e8435a99b97453b3e1654.jpg",
-            "https://i.postimg.cc/xjtsyw3h/8a94253df5e7a8209e6681d4c139ddf3.jpg",
-            "https://i.postimg.cc/G3qMJWjL/ae235ab23ef84f2d131da0aff905748b.jpg",
-            "https://i.postimg.cc/zD0dSskV/b4194e5641543171236be12abce5aa52.jpg",
-            "https://i.postimg.cc/DfBCd9cW/d3f1f137b25ca3df0aa2c4debe35aa91.jpg",
-            "https://i.postimg.cc/9XJxt6BR/e577ac6cda89eaa776cc20ce836db94d.jpg",
-            "https://i.postimg.cc/L4NyBcVf/e80127fed7d8150aad67e534ef090675.jpg"
-        ];
+const maleAvatars = [
+    "https://i.postimg.cc/rFdw8LnN/photo-2023-02-20-10-15-53.jpg",
+    "https://i.postimg.cc/m202k6J7/photo-2024-06-15-21-41-43.jpg",
+    "https://i.postimg.cc/CLWL56XG/photo-2025-03-20-17-55-27.jpg",
+    "https://i.postimg.cc/T2CkqzcT/037598cab1dfc7fe94f8a5c2a3502ca1.jpg",
+    "https://i.postimg.cc/NGpN73xc/341398c0dfe8ed9b55d1fa0fe8de7b05.jpg",
+    "https://i.postimg.cc/sx6wjW2K/490f18bc41427a95dc2c1e9b56d0ee2f.jpg",
+    "https://i.postimg.cc/SRTDS9K6/4dde0580bad54b459f57f01fd14d62fd.jpg",
+    "https://i.postimg.cc/vTq3Ynm0/72b29e77cae81ae3c55d0d1aca84fbb7.jpg",
+    "https://i.postimg.cc/Pf26zgMH/781e3908b7c79fb6499cc72d9447f144.jpg",
+    "https://i.postimg.cc/5y7n4ztn/7b4d77048f5e8435a99b97453b3e1654.jpg",
+    "https://i.postimg.cc/xjtsyw3h/8a94253df5e7a8209e6681d4c139ddf3.jpg",
+    "https://i.postimg.cc/G3qMJWjL/ae235ab23ef84f2d131da0aff905748b.jpg",
+    "https://i.postimg.cc/zD0dSskV/b4194e5641543171236be12abce5aa52.jpg",
+    "https://i.postimg.cc/DfBCd9cW/d3f1f137b25ca3df0aa2c4debe35aa91.jpg",
+    "https://i.postimg.cc/9XJxt6BR/e577ac6cda89eaa776cc20ce836db94d.jpg",
+    "https://i.postimg.cc/L4NyBcVf/e80127fed7d8150aad67e534ef090675.jpg"
+];
 
- const randomActions = [
-            "Chào cậu! Xin làm quen, đừng ngại nhé", "Nhóm mình thiếu cậu, nay đủ rồi", "Tuyệt vời, tìm đúng người để thả thính", "Mình chờ cậu từ lâu lắm rồi đấy", "Tim mình có chỗ, cậu vào không", "Bạn đến đây vì muốn tìm ai", "Nụ cười cậu làm tim mình lạc nhịp", "Gu mình đấy, đừng đi đâu nhé", "Mãi mới thấy cậu xuất hiện ở đây", "Cậu có muốn làm người yêu mình", "Xin thông tin để chúng ta làm bạn", "Nhóm này tự dưng đáng yêu hơn", "Bạn có phép thuật làm mình mê", "Cậu là tia nắng giữa buổi đêm", "Ánh mắt ấy làm mình phải nhắn tin", "Mình đã thích cậu từ cái nhìn", "Mời cậu vào chỗ trống trong tim", "Đừng làm mình phải tán tỉnh nhiều", "Cậu nhìn xem, mình hợp nhau đấy", "Cậu độc thân à? Mình cũng thế", "Gửi cậu một cái ôm thật chặt", "Thả thính nhau, rồi yêu luôn nha", "Đón lấy trái tim mình đi nè", "Nhắn tin riêng cho mình đi nhé", "Cậu làm mình quên cả lối về", "Món quà tuyệt nhất là cậu đó", "Cậu là định mệnh của mình chưa", "Thời tiết hôm nay có cậu thật đẹp", "Chỉ muốn được ở gần bên cậu", "Vòng tay này chờ cậu đấy", "Mạnh dạn lên, tương lai có mình", "Chúng ta đi hẹn hò được không", "Vui vẻ nha, cậu tuyệt vời lắm", "Mình đã đổ cậu từ bao giờ", "Thương cậu rồi, cần gì cứ nói", "Cậu giống như nhân vật trong mơ", "Nhóm này có mình và cậu thôi", "Mê mẩn nụ cười rạng rỡ của cậu", "Làm quen nhau, biết đâu nên duyên", "Cần một bến đỗ là cậu đây", "Bây giờ cậu chọn mình hay ai", "Tự tin lên, cậu có mình rồi", "Chỉ muốn được cậu quan tâm thôi", "Đừng để mình phải chờ lâu nhé", "Hợp nhau rồi, sao chưa nói yêu", "Mê cậu quá, mình phải làm sao", "Gần lại đây, chuyện trò cùng mình", "Ngọt ngào như cậu ai mà chịu nổi", "Mình có duyên rồi đó nha", "Cậu giống như ánh trăng đêm nay", "Đón mình đi, mình chờ cậu rước", "Vô tình gặp cậu, cố ý làm quen", "Cá tính lắm, mình thích kiểu này", "Hứa nhé, yêu nhau rồi đừng bỏ", "Cậu chính là chân ái đời mình", "Bảo vệ cậu cả đời được không", "Tình cờ gặp cậu, yêu vội luôn", "Mình đã chuẩn bị mọi thứ rồi", "Cậu có muốn cùng mình đi chơi", "Thích làm người yêu mình không", "Đừng bận tâm ai kia, nhìn mình", "Bắt đầu thôi, trò chơi tình yêu", "Cậu là nguồn cảm hứng của mình", "Mãi mãi về sau có mình và cậu", "Ấm áp như cậu làm sao quên được", "Cậu làm mình muốn làm điều dại", "Giữ chặt lấy tay mình nhé", "Sưởi ấm đêm nay bằng tình yêu", "Cậu chính là ước mơ của mình", "Đơn giản là mình yêu cậu rồi", "Ngừng thở khi thấy cậu cười", "Thích cậu mất rồi, làm sao đây", "Vương vấn mãi nụ cười của cậu", "Mình có cần thêm ai nữa đâu", "Cậu là lý do mình vui vẻ", "Tâm sự với mình, đừng giấu nhé", "Chỉ muốn thấy cậu mỗi ngày", "Mình đang cần cậu ở bên", "Cậu là phiên bản hoàn hảo", "Tìm thấy cậu, thật may mắn", "Đợi cậu lâu lắm rồi đó", "Hãy nói cho mình điều cậu muốn", "Cậu là ngọn lửa trong tim", "Mãi là của nhau nhé", "Chỉ cần cậu là đủ rồi", "Yêu cậu nhất trên đời", "Nắm tay mình đi hết đường", "Cậu có phải thiên thần không", "Mình muốn cùng cậu xây nhà", "Thích cậu từ lâu rồi", "Cậu là tất cả của mình", "Bên nhau nha, đừng bỏ đi", "Cậu là ngôi sao sáng nhất", "Làm sao để cậu yêu mình", "Cậu có muốn mình hôn không", "Yêu cậu lắm, biết không", "Cậu là điều tuyệt vời nhất", "Chỉ cần cậu thôi, không ai", "Mình có thể tin cậu chứ", "Cậu làm mình hạnh phúc", "Không thể sống thiếu cậu", "Cậu ơi, yêu mình đi"
-        ];
+const randomActions = [
+    "Chào cậu! Xin làm quen, đừng ngại nhé", "Nhóm mình thiếu cậu, nay đủ rồi", "Tuyệt vời, tìm đúng người để thả thính", "Mình chờ cậu từ lâu lắm rồi đấy", "Tim mình có chỗ, cậu vào không", "Bạn đến đây vì muốn tìm ai", "Nụ cười cậu làm tim mình lạc nhịp", "Gu mình đấy, đừng đi đâu nhé", "Mãi mới thấy cậu xuất hiện ở đây", "Cậu có muốn làm người yêu mình", "Xin thông tin để chúng ta làm bạn", "Nhóm này tự dưng đáng yêu hơn", "Bạn có phép thuật làm mình mê", "Cậu là tia nắng giữa buổi đêm", "Ánh mắt ấy làm mình phải nhắn tin", "Mình đã thích cậu từ cái nhìn", "Mời cậu vào chỗ trống trong tim", "Đừng làm mình phải tán tỉnh nhiều", "Cậu nhìn xem, mình hợp nhau đấy", "Cậu độc thân à? Mình cũng thế", "Gửi cậu một cái ôm thật chặt", "Thả thính nhau, rồi yêu luôn nha", "Đón lấy trái tim mình đi nè", "Nhắn tin riêng cho mình đi nhé", "Cậu làm mình quên cả lối về", "Món quà tuyệt nhất là cậu đó", "Cậu là định mệnh của mình chưa", "Thời tiết hôm nay có cậu thật đẹp", "Chỉ muốn được ở gần bên cậu", "Vòng tay này chờ cậu đấy", "Mạnh dạn lên, tương lai có mình", "Chúng ta đi hẹn hò được không", "Vui vẻ nha, cậu tuyệt vời lắm", "Mình đã đổ cậu từ bao giờ", "Thương cậu rồi, cần gì cứ nói", "Cậu giống như nhân vật trong mơ", "Nhóm này có mình và cậu thôi", "Mê mẩn nụ cười rạng rỡ của cậu", "Làm quen nhau, biết đâu nên duyên", "Cần một bến đỗ là cậu đây", "Bây giờ cậu chọn mình hay ai", "Tự tin lên, cậu có mình rồi", "Chỉ muốn được cậu quan tâm thôi", "Đừng để mình phải chờ lâu nhé", "Hợp nhau rồi, sao chưa nói yêu", "Mê cậu quá, mình phải làm sao", "Gần lại đây, chuyện trò cùng mình", "Ngọt ngào như cậu ai mà chịu nổi", "Mình có duyên rồi đó nha", "Cậu giống như ánh trăng đêm nay", "Đón mình đi, mình chờ cậu rước", "Vô tình gặp cậu, cố ý làm quen", "Cá tính lắm, mình thích kiểu này", "Hứa nhé, yêu nhau rồi đừng bỏ", "Cậu chính là chân ái đời mình", "Bảo vệ cậu cả đời được không", "Tình cờ gặp cậu, yêu vội luôn", "Mình đã chuẩn bị mọi thứ rồi", "Cậu có muốn cùng mình đi chơi", "Thích làm người yêu mình không", "Đừng bận tâm ai kia, nhìn mình", "Bắt đầu thôi, trò chơi tình yêu", "Cậu là nguồn cảm hứng của mình", "Mãi mãi về sau có mình và cậu", "Ấm áp như cậu làm sao quên được", "Cậu làm mình muốn làm điều dại", "Giữ chặt lấy tay mình nhé", "Sưởi ấm đêm nay bằng tình yêu", "Cậu chính là ước mơ của mình", "Đơn giản là mình yêu cậu rồi", "Ngừng thở khi thấy cậu cười", "Thích cậu mất rồi, làm sao đây", "Vương vấn mãi nụ cười của cậu", "Mình có cần thêm ai nữa đâu", "Cậu là lý do mình vui vẻ", "Tâm sự với mình, đừng giấu nhé", "Chỉ muốn thấy cậu mỗi ngày", "Mình đang cần cậu ở bên", "Cậu là phiên bản hoàn hảo", "Tìm thấy cậu, thật may mắn", "Đợi cậu lâu lắm rồi đó", "Hãy nói cho mình điều cậu muốn", "Cậu là ngọn lửa trong tim", "Mãi là của nhau nhé", "Chỉ cần cậu là đủ rồi", "Yêu cậu nhất trên đời", "Nắm tay mình đi hết đường", "Cậu có phải thiên thần không", "Mình muốn cùng cậu xây nhà", "Thích cậu từ lâu rồi", "Cậu là tất cả của mình", "Bên nhau nha, đừng bỏ đi", "Cậu là ngôi sao sáng nhất", "Làm sao để cậu yêu mình", "Cậu có muốn mình hôn không", "Yêu cậu lắm, biết không", "Cậu là điều tuyệt vời nhất", "Chỉ cần cậu thôi, không ai", "Mình có thể tin cậu chứ", "Cậu làm mình hạnh phúc", "Không thể sống thiếu cậu", "Cậu ơi, yêu mình đi"
+];
 
 const RELOAD_INTERVAL = 5;
 const MEMBER_CHANGE_INTERVAL = 5;

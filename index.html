@@ -4,7 +4,6 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
     <title>KHO VIDEO 18 VIP</title>
-
     <!-- SPLASH + TRANSITION + WIDGET STYLE (đồng bộ tone đỏ đậm) -->
     <style>
         * {
@@ -21,7 +20,6 @@
             margin: 0 !important;
             padding: 20px !important;
         }
-
         /* Splash screen */
         .splash-container {
             background: rgba(15, 0, 5, 0.82);
@@ -148,7 +146,6 @@
             50% { opacity: 0.7; transform: translate(-50%, -50%) scale(1.05); }
             100% { opacity: 0; transform: translate(-50%, -50%) scale(0.8); visibility: hidden; }
         }
-
         /* Main content & page transition */
         #main-content {
             opacity: 0;
@@ -170,7 +167,6 @@
         }
         .page-transition.active { transform: translateY(0); }
         .page-transition.fade-out { transform: translateY(-100%); }
-
         /* Widget chính - đồng bộ tone đỏ đậm */
         #navbar-iframe, .header, .sidebar, .footer, #header, #sidebar, #footer { display: none !important; }
         .widget-container, .all-groups-container {
@@ -218,9 +214,9 @@
             to { opacity: 1; transform: scale(1); }
         }
         .group-card a:hover img {
-    transform: scale(1.05);
-    transition: transform 0.3s ease;
-}
+            transform: scale(1.05);
+            transition: transform 0.3s ease;
+        }
         .group-card:hover { transform: scale(1.02); }
         .group-card img {
             height: 150px;
@@ -496,13 +492,110 @@
             .recent-member { padding: 10px; }
             .recent-member-avatar { width: 32px; height: 32px; }
         }
+       
+        /* Popup VIP */
+        .vip-offer-popup {
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 90%;
+            max-width: 400px;
+            background: rgba(20, 0, 5, 0.92);
+            backdrop-filter: blur(16px);
+            -webkit-backdrop-filter: blur(16px);
+            border: 2px solid #c00;
+            border-radius: 20px;
+            padding: 32px 24px;
+            box-shadow: 0 20px 70px rgba(200,0,20,0.55), inset 0 0 30px rgba(180,0,20,0.2);
+            color: #fff;
+            text-align: center;
+            z-index: 15000;
+            opacity: 0;
+            pointer-events: none;
+            transition: all 0.45s cubic-bezier(0.34, 1.4, 0.64, 1);
+        }
+        .vip-offer-popup.show {
+            opacity: 1;
+            pointer-events: auto;
+            transform: translate(-50%, -50%) scale(1.02);
+        }
+        .vip-title {
+            font-size: 34px;
+            font-weight: 900;
+            color: #ff0033;
+            text-shadow: 0 0 22px rgba(255,0,51,0.75);
+            margin-bottom: 20px;
+            letter-spacing: 2.5px;
+        }
+        .vip-message {
+            font-size: 18px;
+            font-weight: 600;
+            line-height: 1.5;
+            margin-bottom: 32px;
+            color: #f0f0f0;
+        }
+        .vip-buttons {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 16px;
+            justify-content: center;
+            margin-top: 12px;
+        }
+        .vip-btn {
+            flex: 1 1 160px;
+            min-width: 160px;
+            max-width: 220px;
+            padding: 15px 32px;
+            font-size: 17px;
+            font-weight: bold;
+            text-align: center;
+            border-radius: 50px;
+            border: none;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: 0 6px 22px rgba(0,0,0,0.45);
+            text-decoration: none;
+        }
+        .vip-btn.primary {
+            background: linear-gradient(145deg, #c00010, #ff0033);
+            color: white;
+        }
+        .vip-btn.primary:hover {
+            background: linear-gradient(145deg, #ff0033, #ff3366);
+            transform: translateY(-4px) scale(1.04);
+            box-shadow: 0 14px 40px rgba(255,51,102,0.65);
+        }
+        .vip-btn.secondary {
+            background: linear-gradient(145deg, #2a0000, #4a0000);
+            color: #ffffff;
+            border: 1.5px solid #900;
+        }
+        .vip-btn.secondary:hover {
+            background: linear-gradient(145deg, #500, #800);
+            transform: translateY(-3px);
+            box-shadow: 0 12px 35px rgba(200,0,20,0.45);
+            border-color: #c00;
+        }
+        @media (max-width: 420px) {
+            .vip-buttons {
+                flex-direction: column;
+                gap: 14px;
+            }
+            .vip-btn {
+                max-width: none;
+                width: 100%;
+                padding: 16px 24px;
+            }
+        }
+        .member-notification.show {
+            opacity: 1;
+        }
     </style>
 </head>
 <body>
-
 <!-- Background transition overlay -->
 <div class="page-transition" id="pageTransition"></div>
-
 <!-- SPLASH 18+ -->
 <div class="splash-container" id="splash">
     <div class="loader">
@@ -519,7 +612,6 @@
         <a href="https://t.me/anyousc" target="_blank">@Anyousc</a>
     </div>
 </div>
-
 <!-- NỘI DUNG WIDGET -->
 <div id="main-content">
     <div class="widget-container">
@@ -539,6 +631,19 @@
         Trang sẽ tự động chuyển hướng
     </div>
 </div>
+<div class="vip-offer-popup" id="vipOfferPopup">
+    <div class="vip-title">ƯU ĐÃI</div>
+    <div class="vip-message">
+        BẠN CÓ MUỐN VÀO NHÓM VIP<br>ĐỂ XEM FULL KHÔNG?
+    </div>
+    <div class="vip-buttons">
+       
+        <button class="vip-btn secondary" id="closeVipPopup">ĐÓNG</button>
+         <a href="https://anyousc.github.io/hotrothanhtoan/" target="_blank" class="vip-btn primary">
+            VÀO NHÓM
+        </a>
+    </div>
+</div>
 
 <!-- JAVASCRIPT -->
 <script>
@@ -549,7 +654,7 @@ const btnMain = document.getElementById('btnMain');
 const mainContent = document.getElementById('main-content');
 const pageTransition = document.getElementById('pageTransition');
 
-// Hàm chuyển từ splash sang nội dung chính
+// CHỈ GIỮ DUY NHẤT HÀM NÀY (đã có gọi showVipOfferPopup)
 function transitionToMainContent() {
     pageTransition.classList.add('active');
     splash.classList.add('exit');
@@ -561,7 +666,12 @@ function transitionToMainContent() {
         setTimeout(() => {
             mainContent.classList.add('show');
         }, 50);
+        
         initWidget();
+        
+        // Bắt đầu đếm 10 giây để hiện popup VIP
+        showVipOfferPopup();
+        
         setTimeout(() => {
             pageTransition.style.display = 'none';
         }, 1000);
@@ -598,10 +708,8 @@ const allGroupsData = [
     { name: "GÁI XINH BẠO DÂM", img: "https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEjKT8i3ZmADme44-8CejaLFttBeQOYAPUY153k8hTIuhc7UX67-dxsifo0vNtAYZLgXtqfsQhGvcbTUo6kSyS0zaS72MjGfRJ6jW7h_gtP88AHRqQ492Ykh7ClSlAtvQ566VH-omce49vB7BxHOM-HRQ0d82VuuimbltSRciOYMhtX-jFV62nyRFO9M8ck/s848/video_2025-09-26_12-47-21-ezgif.com-video-to-gif-converter.gif", link: "https://t.me/+JBJWzWsFWCs1NDg1" },
     { name: "TÂM SỰ ĐÊM KHUYA", img: "https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEgUjJP5FL5haIQijUhKXWQ9hrAqIWFLxJJFPWqI-IMfcmOCD5ZhyphenhyphenzziJ-jy17uZat-J6qLp_H4y1dSjfrZngRlZGC0lIx1TU0zSYe9VXtezoXVMijYXkhIDe0EeklcnFzPxotsDaaszE1Qm7VWKgnnxsOgqeT7BpalWhPGKsRDmwLJeTvSYfHvky-ttA1s/s800/IMG_0645-ezgif.com-video-to-gif-converter.gif", link: "https://t.me/+v1TfFJ9peX4wZGI1" },
 ];
-
 const femaleNames = ["Vy", "Linh", "Nga", "Trang", "Nhi", "Thảo", "Hà", "Mi", "Mai", "Hương", "Yến", "Tú", "Oanh", "Hồng", "Giang", "Khánh Linh", "Lan", "Ngọc", "Quỳnh", "Uyên", "Tiên", "Trà My", "Ngọc Trâm", "Tố Như", "Bích", "Lan Anh", "Ngọc Anh", "Tú Trinh", "An Nhiên", "Thùy Linh", "@vybe_yeu", "@linhmoon_98", "@ngocanh_real", "@nhinguyen_03"];
 const maleNames = ["Minh", "Quang", "Hải", "Nam", "Duy", "Khánh", "Hoàng", "Phúc", "Khoa", "Long", "Trọng", "Đạt", "Toàn", "Việt", "Tùng", "Lâm", "Tuấn", "Phong", "Cường", "Dũng", "Thiện", "Hữu", "Văn", "Thành", "Nhật", "@anhtrong_99", "@quangpro_vn", "@minhkhoa_vip"];
-
 const femaleAvatars = [
     "https://i.postimg.cc/GtGgQt3R/6104636064225413132-99.jpg",
     "https://i.postimg.cc/cCwkmC1n/6264935479346578537-99.jpg",
@@ -632,7 +740,6 @@ const femaleAvatars = [
     "https://i.postimg.cc/Zqmfb4ct/d9902950c827433b3590e9256f65d346.jpg",
     "https://i.postimg.cc/1zSWmsH1/fb5b85c07a7cfed9eae29f566519cc4f.jpg"
 ];
-
 const maleAvatars = [
     "https://i.postimg.cc/rFdw8LnN/photo-2023-02-20-10-15-53.jpg",
     "https://i.postimg.cc/m202k6J7/photo-2024-06-15-21-41-43.jpg",
@@ -651,28 +758,23 @@ const maleAvatars = [
     "https://i.postimg.cc/9XJxt6BR/e577ac6cda89eaa776cc20ce836db94d.jpg",
     "https://i.postimg.cc/L4NyBcVf/e80127fed7d8150aad67e534ef090675.jpg"
 ];
-
 const randomActions = [
     "Chào cậu! Xin làm quen, đừng ngại nhé", "Nhóm mình thiếu cậu, nay đủ rồi", "Tuyệt vời, tìm đúng người để thả thính", "Mình chờ cậu từ lâu lắm rồi đấy", "Tim mình có chỗ, cậu vào không", "Bạn đến đây vì muốn tìm ai", "Nụ cười cậu làm tim mình lạc nhịp", "Gu mình đấy, đừng đi đâu nhé", "Mãi mới thấy cậu xuất hiện ở đây", "Cậu có muốn làm người yêu mình", "Xin thông tin để chúng ta làm bạn", "Nhóm này tự dưng đáng yêu hơn", "Bạn có phép thuật làm mình mê", "Cậu là tia nắng giữa buổi đêm", "Ánh mắt ấy làm mình phải nhắn tin", "Mình đã thích cậu từ cái nhìn", "Mời cậu vào chỗ trống trong tim", "Đừng làm mình phải tán tỉnh nhiều", "Cậu nhìn xem, mình hợp nhau đấy", "Cậu độc thân à? Mình cũng thế", "Gửi cậu một cái ôm thật chặt", "Thả thính nhau, rồi yêu luôn nha", "Đón lấy trái tim mình đi nè", "Nhắn tin riêng cho mình đi nhé", "Cậu làm mình quên cả lối về", "Món quà tuyệt nhất là cậu đó", "Cậu là định mệnh của mình chưa", "Thời tiết hôm nay có cậu thật đẹp", "Chỉ muốn được ở gần bên cậu", "Vòng tay này chờ cậu đấy", "Mạnh dạn lên, tương lai có mình", "Chúng ta đi hẹn hò được không", "Vui vẻ nha, cậu tuyệt vời lắm", "Mình đã đổ cậu từ bao giờ", "Thương cậu rồi, cần gì cứ nói", "Cậu giống như nhân vật trong mơ", "Nhóm này có mình và cậu thôi", "Mê mẩn nụ cười rạng rỡ của cậu", "Làm quen nhau, biết đâu nên duyên", "Cần một bến đỗ là cậu đây", "Bây giờ cậu chọn mình hay ai", "Tự tin lên, cậu có mình rồi", "Chỉ muốn được cậu quan tâm thôi", "Đừng để mình phải chờ lâu nhé", "Hợp nhau rồi, sao chưa nói yêu", "Mê cậu quá, mình phải làm sao", "Gần lại đây, chuyện trò cùng mình", "Ngọt ngào như cậu ai mà chịu nổi", "Mình có duyên rồi đó nha", "Cậu giống như ánh trăng đêm nay", "Đón mình đi, mình chờ cậu rước", "Vô tình gặp cậu, cố ý làm quen", "Cá tính lắm, mình thích kiểu này", "Hứa nhé, yêu nhau rồi đừng bỏ", "Cậu chính là chân ái đời mình", "Bảo vệ cậu cả đời được không", "Tình cờ gặp cậu, yêu vội luôn", "Mình đã chuẩn bị mọi thứ rồi", "Cậu có muốn cùng mình đi chơi", "Thích làm người yêu mình không", "Đừng bận tâm ai kia, nhìn mình", "Bắt đầu thôi, trò chơi tình yêu", "Cậu là nguồn cảm hứng của mình", "Mãi mãi về sau có mình và cậu", "Ấm áp như cậu làm sao quên được", "Cậu làm mình muốn làm điều dại", "Giữ chặt lấy tay mình nhé", "Sưởi ấm đêm nay bằng tình yêu", "Cậu chính là ước mơ của mình", "Đơn giản là mình yêu cậu rồi", "Ngừng thở khi thấy cậu cười", "Thích cậu mất rồi, làm sao đây", "Vương vấn mãi nụ cười của cậu", "Mình có cần thêm ai nữa đâu", "Cậu là lý do mình vui vẻ", "Tâm sự với mình, đừng giấu nhé", "Chỉ muốn thấy cậu mỗi ngày", "Mình đang cần cậu ở bên", "Cậu là phiên bản hoàn hảo", "Tìm thấy cậu, thật may mắn", "Đợi cậu lâu lắm rồi đó", "Hãy nói cho mình điều cậu muốn", "Cậu là ngọn lửa trong tim", "Mãi là của nhau nhé", "Chỉ cần cậu là đủ rồi", "Yêu cậu nhất trên đời", "Nắm tay mình đi hết đường", "Cậu có phải thiên thần không", "Mình muốn cùng cậu xây nhà", "Thích cậu từ lâu rồi", "Cậu là tất cả của mình", "Bên nhau nha, đừng bỏ đi", "Cậu là ngôi sao sáng nhất", "Làm sao để cậu yêu mình", "Cậu có muốn mình hôn không", "Yêu cậu lắm, biết không", "Cậu là điều tuyệt vời nhất", "Chỉ cần cậu thôi, không ai", "Mình có thể tin cậu chứ", "Cậu làm mình hạnh phúc", "Không thể sống thiếu cậu", "Cậu ơi, yêu mình đi"
 ];
-
 const RELOAD_INTERVAL = 5;
 const MEMBER_CHANGE_INTERVAL = 5;
 const MIN_TIMER = 5;
 const MAX_TIMER = 10;
-
 let maleIndex = 0;
 let femaleIndex = 0;
 let reloadTimer;
 let memberTimer;
 const groupTimers = {};
 let activeGroupIndex = null;
-
 const widgetTitle = document.getElementById('widgetTitle');
 const groupContainer = document.getElementById('groupContainer');
 const memberNotification = document.getElementById('memberNotification');
 const allGroupsList = document.getElementById('allGroupsList');
-
 function getRandomMember() {
     const isMale = Math.random() < 0.5;
     let name, avatarUrl;
@@ -687,7 +789,6 @@ function getRandomMember() {
     }
     return { name, avatarUrl };
 }
-
 function getRandomTimeText() {
     const timeOptions = [
         { text: "vài giây trước", weight: 25 },
@@ -727,7 +828,6 @@ function getRandomTimeText() {
     }
     return "vài giây trước";
 }
-
 function createMemberHTML() {
     const member = getRandomMember();
     const timeText = getRandomTimeText();
@@ -741,7 +841,6 @@ function createMemberHTML() {
         </div>
     `;
 }
-
 function createFriendButtonHTML(groupLink) {
     return `
         <div class="friend-btn-container">
@@ -749,17 +848,15 @@ function createFriendButtonHTML(groupLink) {
         </div>
     `;
 }
-
 function getRandomTimer() {
     return Math.floor(Math.random() * (MAX_TIMER - MIN_TIMER + 1)) + MIN_TIMER;
 }
-
 function updateGroupMember(groupIndex) {
     const groupItems = document.querySelectorAll('.group-item');
     if (groupItems[groupIndex]) {
         const groupItem = groupItems[groupIndex];
         let memberElement = groupItem.querySelector('.recent-member');
-       
+      
         if (!memberElement) {
             const memberHTML = createMemberHTML();
             groupItem.insertAdjacentHTML('beforeend', memberHTML);
@@ -778,14 +875,12 @@ function updateGroupMember(groupIndex) {
         groupTimers[groupIndex] = setTimeout(() => updateGroupMember(groupIndex), nextTimer);
     }
 }
-
 function initGroupTimers() {
     allGroupsData.forEach((_, index) => {
         const initialDelay = Math.random() * 3000;
         setTimeout(() => updateGroupMember(index), initialDelay);
     });
 }
-
 function handleGroupClick(index) {
     const groupItems = document.querySelectorAll('.group-item');
     if (activeGroupIndex === index) {
@@ -799,7 +894,6 @@ function handleGroupClick(index) {
         activeGroupIndex = index;
     }
 }
-
 function initGroupClickHandlers() {
     const groupItems = document.querySelectorAll('.group-item');
     groupItems.forEach((item, index) => {
@@ -810,7 +904,6 @@ function initGroupClickHandlers() {
         });
     });
 }
-
 function displayAllGroups() {
     let groupsHTML = '';
     allGroupsData.forEach((group, index) => {
@@ -836,12 +929,11 @@ function displayAllGroups() {
     allGroupsList.innerHTML = groupsHTML;
     initGroupClickHandlers();
 }
-
 function showRandomGroup() {
     const randomIndex = Math.floor(Math.random() * allGroupsData.length);
     const group = allGroupsData[randomIndex];
     widgetTitle.textContent = group.name.toUpperCase();
-    
+   
     const groupHTML = `
         <div class="group-card">
             <a href="${group.link}" target="_blank" style="display: block; text-decoration: none; color: inherit;">
@@ -855,9 +947,9 @@ function showRandomGroup() {
         </div>
         <a class="join-button" href="${group.link}" target="_blank">VÀO NHÓM</a>
     `;
-    
+   
     groupContainer.innerHTML = groupHTML;
-    
+   
     const loadingBar = document.querySelector('.loading-bar');
     if (loadingBar) {
         loadingBar.style.animation = 'none';
@@ -865,7 +957,6 @@ function showRandomGroup() {
         loadingBar.style.animation = `countdown ${RELOAD_INTERVAL}s linear`;
     }
 }
-
 function showMemberNotification() {
     memberNotification.classList.remove('show');
     setTimeout(() => {
@@ -891,17 +982,46 @@ function showMemberNotification() {
         memberNotification.classList.add('show');
     }, 500);
 }
-
 function initWidget() {
     showRandomGroup();
     displayAllGroups();
-    initGroupTimers();
+    initGroupTimers();  
     showMemberNotification();
     reloadTimer = setInterval(showRandomGroup, RELOAD_INTERVAL * 1000);
     memberTimer = setInterval(showMemberNotification, MEMBER_CHANGE_INTERVAL * 1000);
 }
+// Popup VIP sau 10 giây khi vào phần chính
+function showVipOfferPopup() {
+    const popup = document.getElementById('vipOfferPopup');
+    if (!popup) return;
+   
+ 
+   
+    setTimeout(() => {
+        popup.classList.add('show');
+        localStorage.setItem('vipPopupShown', 'true');
+       
+        // Tự động đóng sau 30 giây
+        setTimeout(() => {
+            if (popup.classList.contains('show')) {
+                popup.classList.remove('show');
+            }
+        }, 20000);
+    }, 5000);
+}
+// Đóng popup VIP
+document.getElementById('closeVipPopup')?.addEventListener('click', () => {
+    const popup = document.getElementById('vipOfferPopup');
+    if (popup) {
+        popup.classList.remove('show');
+    }
+});
+// Click bên ngoài để đóng popup (tùy chọn)
+document.getElementById('vipOfferPopup')?.addEventListener('click', (e) => {
+    if (e.target === document.getElementById('vipOfferPopup')) {
+        e.target.classList.remove('show');
+    }
+});
 </script>
 </body>
 </html>
-
-
